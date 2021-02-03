@@ -2,7 +2,7 @@ from .db import db
 
 
 class Style(db.Model):
-    __table__ = "styles"
+    __tablename__ = "styles"
 
     id = db.Column(db.Integer, primary_key=True)
     styleType = db.Column(db.String(50), nullable=False)

@@ -3,12 +3,12 @@ from datetime import datetime
 
 
 class Item(db.Model):
-    __table__ = "items"
+    __tablename__ = "items"
 
     id = db.Column(db.Integer, primary_key=True)
     ownerId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     description = db.Column(db.Text)
-    image = db.Column(db.String(1000))
+    image = db.Column(db.Text)
     sizeId = db.Column(db.Integer, db.ForeignKey("sizes.id"), nullable=False)
     purchasedAt = db.Column(db.String(255))
     clean = db.Column(db.Boolean)

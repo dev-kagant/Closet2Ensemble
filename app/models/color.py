@@ -2,7 +2,7 @@ from .db import db
 
 
 class Color(db.Model):
-    __table__ = "colors"
+    __tablename__ = "colors"
 
     id = db.Column(db.Integer, primary_key=True)
     color = db.Column(db.String(50), nullable=False)

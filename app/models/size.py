@@ -2,7 +2,7 @@ from .db import db
 
 
 class Size(db.Model):
-    __table__ = "sizes"
+    __tablename__ = "sizes"
 
     id = db.Column(db.Integer, primary_key=True)
     sizeDescription = db.Column(db.String(50), nullable=False)

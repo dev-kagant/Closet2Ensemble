@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class Outfit(db.Model):
-    __table__ = "outfits"
+    __tablename__ = "outfits"
 
     id = db.Column(db.Integer, primary_key=True)
     creatorId = db.Column(

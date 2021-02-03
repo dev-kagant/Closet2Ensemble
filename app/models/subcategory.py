@@ -2,7 +2,7 @@ from .db import db
 
 
 class SubCategory(db.Model):
-    __table__ = "subcategories"
+    __tablename__ = "subcategories"
 
     id = db.Column(db.Integer, primary_key=True)
     subCategoryName = db.Column(db.String(50), nullable=False)

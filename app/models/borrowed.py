@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class Borrowed(db.Model):
-    __table__ = "borrow"
+    __tablename__ = "borrow"
 
     id = db.Column(db.Integer, primary_key=True)
     borrowerId = db.Column(

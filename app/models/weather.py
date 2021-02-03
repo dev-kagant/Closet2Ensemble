@@ -2,7 +2,7 @@ from .db import db
 
 
 class Weather(db.Model):
-    __table__ = "weather"
+    __tablename__ = "weather"
 
     id = db.Column(db.Integer, primary_key=True)
     weatherType = db.Column(db.String(50), nullable=False)
