@@ -4,7 +4,7 @@ from .item import Item
 from .category import Category
 from .subcategory import SubCategory
 from .size import Size
-from .weather import Weather, temp
+from .weather import Weather, theWeather
 from .style import Style, itemStyle
 from .color import Color, itemColor
 from .borrowed import Borrowed

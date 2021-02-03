@@ -3,6 +3,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+follow = db.Table(
+    'follows',
+    db.Column('userFollowed', db.Integer, db.ForeignKey('users.id')),
+    db.Column('userFollowing', db.Integer, db.ForeignKey('users.id')),
+)
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -18,15 +25,15 @@ class User(db.Model, UserMixin):
     borrowedItems = db.relationship(
         'Borrowed', backref="borrowerId", lazy="dynamic")
     following = db.relationship(
-        "User", backref=db.backref('followers'), lazy="dynamic")
+        "User", secondary=follow, backref=db.backref('followers', lazy="dynamic"))
     outfits = db.relationship(
-        "Outfit", backref=db.backref('userId'), lazy="dynamic")
+        "Outfit", backref=db.backref('userId', lazy="dynamic"))
 
-    @property
+    @ property
     def password(self):
         return self.hashed_password
 
-    @password.setter
+    @ password.setter
     def password(self, password):
         self.hashed_password = generate_password_hash(password)
 
@@ -47,10 +54,3 @@ class User(db.Model, UserMixin):
             "following": [follow.to_dict() for follow in self.following],
             "followers": [follower.to_dict() for follower in self.followers]
         }
-
-
-follow = db.Table(
-    'follows',
-    db.Column('userFollowed', db.Integer, db.ForeignKey('user.id')),
-    db.Column('userFollowing', db.Integer, db.ForeignKey('user.id')),
-)

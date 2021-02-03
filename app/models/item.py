@@ -16,7 +16,7 @@ class Item(db.Model):
     lastWorn = db.Column(db.Date)
     timesWorm = db.Column(db.Integer)
     borrowedId = db.Column(db.Integer, db.ForeignKey(
-        "isborrowed.id"), nullable=False)
+        "borrow.id"), nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

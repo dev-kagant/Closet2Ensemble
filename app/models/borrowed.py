@@ -7,7 +7,7 @@ class Borrowed(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     borrowerId = db.Column(
-        db.Integer, db.ForeignKey("user.id"), nullable=False)
+        db.Integer, db.ForeignKey("users.id"), nullable=False)
     dateBorrowed = db.Column(db.Date, nullable=False)
     notes = db.Column(db.String(2500))
 
