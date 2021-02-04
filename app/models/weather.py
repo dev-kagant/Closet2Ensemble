@@ -2,9 +2,9 @@ from .db import db
 
 
 theWeather = db.Table(
-    'Weathering',
-    db.Column('weatherId', db.Integer, db.ForeignKey('weather.id')),
-    db.Column('itemId', db.Integer, db.ForeignKey('items.id'))
+    'itemWeather',
+    db.Column('weatherId', db.Integer, db.ForeignKey('weather.id'), nullable=False),
+    db.Column('itemId', db.Integer, db.ForeignKey('items.id'), nullable=False)
 )
 
 

@@ -1,5 +1,5 @@
 from .db import db
-from .user import User, follow
+from .user import User, followers
 from .item import Item
 from .category import Category
 from .subcategory import SubCategory

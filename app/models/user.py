@@ -3,11 +3,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-follow = db.Table(
-    'follows',
-    db.Column('userFollowed', db.Integer, db.ForeignKey('users.id')),
-    db.Column('userFollowing', db.Integer, db.ForeignKey('users.id')),
+followers = db.Table(
+    "followers",  # tablename
+    db.Model.metadata,  # inheritance
+    db.Column('leader_id', db.Integer, db.ForeignKey("users.id"), primary_key=True),  # leader
+    db.Column('follower_id', db.Integer, db.ForeignKey("users.id"), primary_key=True),  # follower
 )
+
 
 
 class User(db.Model, UserMixin):
@@ -21,13 +23,17 @@ class User(db.Model, UserMixin):
     bras = db.Column(db.Integer)
     socks = db.Column(db.Integer)
     tees = db.Column(db.Integer)
-    items = db.relationship('Item', backref="ownerId", lazy='dynamic')
+    items = db.relationship('Item', backref="items.ownerId", lazy="dynamic")
     borrowedItems = db.relationship(
-        'Borrowed', backref="borrowerId", lazy="dynamic")
-    following = db.relationship(
-        "User", secondary=follow, backref=db.backref('followers', lazy="dynamic"))
+        'Borrowed', backref="items.borrowerId", lazy="dynamic")
     outfits = db.relationship(
-        "Outfit", backref=db.backref('userId', lazy="dynamic"))
+        "Outfit", backref='outfits.creatorId', lazy="dynamic")
+    following = db.relationship(
+        'User', secondary="followers",
+        primaryjoin=id == followers.c.follower_id,
+        secondaryjoin=id == followers.c.leader_id,
+        backref="followers"
+    )
 
     @ property
     def password(self):

@@ -3,8 +3,8 @@ from .db import db
 
 itemStyle = db.Table(
     'itemStyles',
-    db.Column('styledId', db.Integer, db.ForeignKey('styles.id')),
-    db.Column('itemId', db.Integer, db.ForeignKey('items.id'))
+    db.Column('styledId', db.Integer, db.ForeignKey('styles.id'), nullable=False),
+    db.Column('itemId', db.Integer, db.ForeignKey('items.id'), nullable=False)
 )
 
 

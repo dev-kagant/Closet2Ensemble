@@ -7,7 +7,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     categoryName = db.Column(db.String(50), nullable=False)
     subCategories = db.relationship(
-        'SubCategory', backref="categories", lazy=True)
+        'SubCategory', backref="subcategories.categoryId", lazy=True)
 
     def to_dict(self):
         return {

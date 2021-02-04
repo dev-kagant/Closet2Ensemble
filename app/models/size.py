@@ -6,7 +6,7 @@ class Size(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     sizeDescription = db.Column(db.String(50), nullable=False)
-    items = db.relationship("Item", backref="sizes", lazy=True)
+    items = db.relationship("Item", backref="items.sizeId", lazy=True)
 
     def to_dict(self):
         return {
