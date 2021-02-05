@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import SignUpModal from "./components/auth/SignUp";
 import LoginFormModal from "./components/C2EAccess/Login";
 import SignUpModal from "./components/C2EAccess/SignUp";
-// import NavBar from "./components/NavBar";
+import MyCloset from "./components/Closet/Closet";
+import NavBar from "./components/NavBar/NavBar";
 // import ProtectedRoute from "./components/auth/ProtectedRoute";
 // import UsersList from "./components/UsersList";
 // import User from "./components/User";
@@ -29,7 +30,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar setAuthenticated={setAuthenticated} /> */}
       <Switch>
         <Route path="/" exact={true}>
           <LoginFormModal />
@@ -37,7 +37,11 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpModal />
         </Route>
-        {/* <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
+        {/* <NavBar /> */}
+        <Route path="/closet/:id">
+          <MyCloset />
+        </Route>
+        {/* <ProtectedRoute path="/closet/:id" exact={true} authenticated={authenticated}>
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
