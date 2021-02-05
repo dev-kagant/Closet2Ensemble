@@ -1,4 +1,4 @@
-// import fetch from './csrf';
+// import fetch from '../services/csrf';
 
 // ================= State =================================
 const initialState = {
@@ -38,18 +38,82 @@ export const notAuthenticated = () => ({
 })
 
 // =================== Action Thunks ======================
-// export const login = (user) => async (dispatch) => {
-//     const { credential, password } = user;
-//     const response = await fetch('/api/session', {
+
+
+
+
+// export const authenticate = async () => {
+//     const response = await fetch('/api/auth/', {
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     });
+//     return await response.json();
+// }
+
+// export const login = async (email, password) => {
+//     const response = await fetch('/api/auth/login', {
 //         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
 //         body: JSON.stringify({
-//             credential,
+//             email,
+//             password
+//         })
+//     });
+//     return await response.json();
+// }
+
+// export const logout = async () => {
+//     const response = await fetch("/api/auth/logout", {
+//         headers: {
+//             "Content-Type": "application/json",
+//         }
+//     });
+//     return await response.json();
+// };
+
+
+// export const signUp = async (username, email, password) => {
+//     const response = await fetch("/api/auth/signup", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//             username,
+//             email,
 //             password,
 //         }),
 //     });
-//     dispatch(setUser(response.data.user));
-//     return response;
-// };
+//     return await response.json();
+// }
+
+
+
+
+
+//========================================================
+export const login = (email, password) => async (dispatch) => {
+    const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            password,
+        }),
+    });
+    if (response.ok) {
+        const data = await response.json();
+        await dispatch(isAuthenticated());
+        await dispatch(setClosetOwner(data));
+        console.log(data.id)
+        return data.id;
+    }
+};
 
 export const signUp = ({ username, email, password }) => async dispatch => {
     const response = await fetch("/api/auth/signup", {
@@ -67,8 +131,8 @@ export const signUp = ({ username, email, password }) => async dispatch => {
         const data = await response.json();
         dispatch(isAuthenticated());
         dispatch(setClosetOwner(data));
+        return data.id;
     };
-    // return data;
 }
 
 

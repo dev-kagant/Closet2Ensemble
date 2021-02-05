@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom"
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom"
+// import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 // import * as userActions from "../../../store/user";
 import { signUp } from "../../../store/user";
 
@@ -21,7 +21,7 @@ function SignUpForm() {
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(signUp({ email, username, password }))
-                .then((res) => { history.push(`/`) })     // need to make sure redirect works properly
+                .then((res) => { history.push(`/closet/${res}`) })     // need to make sure redirect works properly
                 .catch(res => {
                     if (res.data && res.data.errors) setErrors(res.data.errors);
                 });
@@ -73,6 +73,7 @@ function SignUpForm() {
                 />
             </label>
             <button type="submit" className="buttonstyle">Open Your Closet</button>
+            <Link to="/" className="">Already Have A Closet</Link>
         </form>
     );
 }

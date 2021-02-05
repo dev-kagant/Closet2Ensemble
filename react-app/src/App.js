@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSelector } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import LoginForm from "./components/auth/LoginForm";
+// import LoginFormModal from "./components/auth/Login";
+// import SignUpModal from "./components/auth/SignUp";
+import LoginFormModal from "./components/C2EAccess/Login";
 import SignUpModal from "./components/C2EAccess/SignUp";
 // import NavBar from "./components/NavBar";
 // import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -8,7 +10,7 @@ import SignUpModal from "./components/C2EAccess/SignUp";
 // import User from "./components/User";
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
+  // const authenticated = useSelector((state) => state.user.authenticated)
   // const [loaded, setLoaded] = useState(false);
 
   // useEffect(() => {
@@ -29,12 +31,9 @@ function App() {
     <BrowserRouter>
       {/* <NavBar setAuthenticated={setAuthenticated} /> */}
       <Switch>
-        {/* <Route path="/login" exact={true}>
-          <LoginForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
-        </Route> */}
+        <Route path="/" exact={true}>
+          <LoginFormModal />
+        </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpModal />
         </Route>

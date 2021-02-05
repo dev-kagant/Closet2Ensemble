@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../Modal/Modal";
-import SignUpForm from "./SignUpForm";
+import LoginForm from "./LoginForm";
 
-const SignUpModal = () => {
+const LoginModal = () => {
     const history = useHistory();
 
     const [showModal, setShowModal] = useState(true);
 
     const closeModal = () => {
         setShowModal(false);
-        history.push("/")
+        history.push("/login")
     }
 
     return (
         <>
+            <div onClick={() => setShowModal(true)} className="button">Login</div>
             {showModal && (
-                // <Modal onClose={() => setShowModal(false)}>
-                <Modal onClose={closeModal}>
-                    <SignUpForm />
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm />
                 </Modal>
             )}
         </>
     )
 }
 
-export default SignUpModal;
+export default LoginModal;
