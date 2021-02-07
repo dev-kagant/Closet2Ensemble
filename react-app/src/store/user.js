@@ -1,5 +1,3 @@
-// import fetch from '../services/csrf';
-
 // ================= State =================================
 const initialState = {
     authenticated: false,
@@ -21,7 +19,7 @@ const setClosetOwner = (user) => {
     };
 };
 
-const removeUser = () => {
+const removeClosetOwner = () => {
     return {
         type: REMOVE_USER,
     };
@@ -39,32 +37,6 @@ export const notAuthenticated = () => ({
 
 // =================== Action Thunks ======================
 
-
-
-
-// export const authenticate = async () => {
-//     const response = await fetch('/api/auth/', {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     });
-//     return await response.json();
-// }
-
-// export const login = async (email, password) => {
-//     const response = await fetch('/api/auth/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             email,
-//             password
-//         })
-//     });
-//     return await response.json();
-// }
-
 // export const logout = async () => {
 //     const response = await fetch("/api/auth/logout", {
 //         headers: {
@@ -74,35 +46,26 @@ export const notAuthenticated = () => ({
 //     return await response.json();
 // };
 
-
-// export const signUp = async (username, email, password) => {
-//     const response = await fetch("/api/auth/signup", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             username,
-//             email,
-//             password,
-//         }),
-//     });
-//     return await response.json();
-// }
-
-
-
-
-
 //========================================================
-export const login = (email, password) => async (dispatch) => {
+
+export const authenticate = async () => {
+    const response = await fetch('/api/auth/', {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return await response.json();
+}
+
+
+export const login = ({ email, password }) => async (dispatch) => {
     const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
             "Content-type": "application/json"
         },
         body: JSON.stringify({
-            email: email,
+            email,
             password,
         }),
     });
@@ -110,7 +73,6 @@ export const login = (email, password) => async (dispatch) => {
         const data = await response.json();
         await dispatch(isAuthenticated());
         await dispatch(setClosetOwner(data));
-        console.log(data.id)
         return data.id;
     }
 };
@@ -136,20 +98,29 @@ export const signUp = ({ username, email, password }) => async dispatch => {
 }
 
 
-// export const logout = () => async (dispatch) => {
-//     const response = await fetch('/api/session', {
-//         method: 'DELETE',
-//     });
-//     dispatch(removeUser());
-//     return response;
-// };
+export const logout = () => async (dispatch) => {
+    const response = await fetch("/api/auth/logout", {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    if (response.ok) {
+        await dispatch(removeClosetOwner());
+        // await dispatch(notAuthenticated())
+        return await response.json();
+
+    }
+};
 
 
-// export const restoreUser = () => async dispatch => {
-//     const res = await fetch('/api/session');
-//     dispatch(setUser(res.data.user));
-//     return res;
-// };
+export const restoreUser = () => async dispatch => {
+    const res = await fetch('/api/auth/');
+    if (res.ok) {
+        const data = await res.json()
+        await dispatch(setClosetOwner(data));
+        await dispatch(isAuthenticated())
+    }
+};
 
 
 const userReducer = (state = initialState, action) => {

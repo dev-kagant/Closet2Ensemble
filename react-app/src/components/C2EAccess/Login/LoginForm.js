@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-// import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-// import * as userActions from "../../../store/user";
-import { login, notAuthenticated } from "../../../store/user";
-import SignUpModal from "../SignUp";
+import { login } from "../../../store/user";
+
 
 import './LoginForm.css'
 
@@ -23,12 +21,12 @@ function LoginForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(login(email, password))
-            .then((res) => {
-                console.log(res)
-                if (authentication) {
+        return dispatch(login({ email, password }))
+            .then((res, rej) => {
+                if (res && authentication) {
                     return history.push(`/closet/${res}`);
                 }
+                return history.push("/");
             })
             .catch((res) => {
                 if (res.data && res.data.errors) setErrors(res.data.errors);
@@ -37,27 +35,32 @@ function LoginForm() {
 
 
     return (
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit} className="login-container" >
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <h1>Log In</h1>
+            <div className="login-header">
+                <h1>Closet to Ensemble</h1>
+                <h3>Please Login</h3>
+            </div>
             <input
                 type="text"
-                placeholder="Email"
+                name="email"
+                placeholder="EMAIL"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
             />
             <input
                 type="password"
-                placeholder="password"
+                name="password"
+                placeholder="PASSWORD"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <button type="submit" className="loginbutton buttonstyle">You May Enter</button>
-            <Link to="/sign-up" className="">Create Your Closet</Link>
+            <button type="submit" className="loginbutton buttonstyle">YOU MAY ENTER</button>
+            <Link to="/sign-up" className="">CREATE  YOUR  CLOSET</Link>
         </form>
     );
 }
