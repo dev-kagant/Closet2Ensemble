@@ -11,3 +11,4 @@
 #### Redux-logger only for development (https://www.npmjs.com/package/redux-logger)
 #### Redux-thunk to apply middleware throughout the application (https://www.npmjs.com/package/redux-thunk)
 #### Pip Datetime (https://pypi.org/project/DateTime/) (https://realpython.com/python-datetime/)
+#### React-Image-Mapper allowing users to click multiple spots on the same the image to go to different routes (https://www.npmjs.com/package/react-image-mapper)

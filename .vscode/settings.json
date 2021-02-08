@@ -3,5 +3,9 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "python.linting.pycodestyleEnabled": false,
-    "python.linting.pydocstyleEnabled": false
+    "python.linting.pydocstyleEnabled": false,
+    "html.hover.references": false,
+    "editor.suggest.showReferences": false,
+    "editor.hover.enabled": false,
+    "editor.hover.sticky": false
 }
