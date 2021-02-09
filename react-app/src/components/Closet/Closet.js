@@ -5,6 +5,7 @@ import ImageMap from "image-map";
 import $ from 'jquery'
 import theCloset from '../../images/okthistime.jpg';
 import theDoor from '../../images/theGreenestDoor.jpg'
+import theBags from '../../images/hanger-silhouettes-hangers-clothes-fashion-equipment-isolated-transparent-retail-boutique-wardrobe-house-hang-out-metal-racks-with-hooks-coat-dress-pants-shirt-vector_81894-4216 (2).jpg'
 import "./Closet.css"
 
 const MyCloset = () => {
@@ -24,23 +25,23 @@ const MyCloset = () => {
     // }
 
 
-    const hoverEffect = () => {
-        $('#image-map area').hover(
-            function () {
-                var coords = $(this).attr('coords').split(','),
-                    width = $('.closet-container').width(),
-                    height = $('.closet-container').height();
-                $('.closet-container .map-selector').addClass('hover').css({
-                    'left': coords[0] + 'px',
-                    'top': coords[1] + 'px',
-                    'right': width - coords[2],
-                    'bottom': height - coords[3]
-                })
-            },
-            function () {
-                $('.closet-container .map-selector').removeClass('hover').attr('style', '');
-            }
-        )
+    const hoverEffect = () => {                 // Only necessary if I want an effect on the image map
+        // $('#image-map area').hover(
+        //     function () {
+        //         var coords = $(this).attr('coords').split(','),
+        //             width = $('.closet-container').width(),
+        //             height = $('.closet-container').height();
+        //         $('.closet-container .map-selector').addClass('hover').css({
+        //             'left': coords[0] + 'px',
+        //             'top': coords[1] + 'px',
+        //             'right': width - coords[2],
+        //             'bottom': height - coords[3]
+        //         })
+        //     },
+        //     function () {
+        //         $('.closet-container .map-selector').removeClass('hover').attr('style', '');
+        //     }
+        // )
     }
 
 
@@ -52,12 +53,24 @@ const MyCloset = () => {
                 <div className="map-selector"></div>
             </div>
             <map name="closet-sections" id="image-map">
-                <area data-title="jackets-one" shape="rect" coords="260,100,430,320" href="" />
-                <area data-title="Sweaters" shape="rect" coords="440,59,605,236" href="" />
-                <area id="bottoms" shape="rect" coords="275,357,450,569" href="" />
-                <area id="dresses-one" shape="rect" coords="824,621,650,355" href="" />
-                <area id="dresses-two" shape="rect" coords="470,268,533,591" href="" />
-                <area id="accessories-one" shape="rect" coords="359,570,436,626" href="" />
+                <area data-title="Jackets" shape="rect" coords="260,100,430,320" href="/closet/:id/jackets" />
+                <area data-title="Sweaters" shape="rect" coords="440,59,595,236" href="" />
+                <area data-title="Bottoms" shape="rect" coords="260,340,425,540" href="" />
+                <area data-title="Dresses" shape="rect" coords="615,340,780,600" href="" />
+                <area data-title="Dresses" shape="rect" coords="445,260,507,535" href="" />
+                <area data-title="Accessories" shape="rect" coords="340,540,415,600" href="" />
+                <area data-title="Shoes" shape="rect" coords="265,555,335,600" href="" />
+                <area data-title="Handbags" shape="rect" coords="445,535,600,600" href="" />
+                <area data-title="Jackets" shape="rect" coords="535,255,595,530" href="" />
+                <area data-title="Tops" shape="rect" coords="615,100,780,320" href="" />
+                <area data-title="Accessories" shape="rect" coords="130,210,160,230" href="" />
+                <area data-title="Handbags" shape="rect" coords="80,80,250,230" href="" />
+                <area data-title="Shoes" shape="rect" coords="80,235,250,320" href="" />
+                <area data-title="Shoes" shape="rect" coords="900,180,970,235" href="" />
+                <area data-title="Handbags" shape="rect" coords="800,60,940,230" href="" />
+                <area data-title="Shoes" shape="rect" coords="790,235,970,320" href="" />
+                <area data-title="Pajamas and Tees" shape="rect" coords="70,320,250,600" href="" />
+                <area data-title="Undergarments" shape="rect" coords="792,320,975,600" href="" />
             </map>
             <div>
                 <img alt="Closet Door" src={theDoor} className="closet-door-left30" />
@@ -77,6 +90,9 @@ const MyCloset = () => {
             <div>
                 <img alt="Closet Door" src={theDoor} className="closet-door-right10" />
             </div>
+            {/* <div className="add-item-icon"><i class="fas fa-shopping-bag"></i></div> */}
+            {/* <div ><img scr={theBags} className="add-item-icon" /></div> */}
+            {/* <div ><img scr={theBags} className="add-item-icon" /></div> */}
         </div>
     )
 }

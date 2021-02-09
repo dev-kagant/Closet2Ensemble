@@ -38,12 +38,13 @@
 .closet-container .map-selector {
     left:0;top:0;right:0;bottom:0;
     color:#546E7A00;
-    transition-duration: .3s;
+    /* transition-duration: .3s;
     transition-timing-function: ease-out;
-    transition-property: top, left, right, bottom, color;
+    transition-property: top, left, right, bottom, color; */
 }
 .closet-container .map-selector.hover {
-    color:#0b4441b0;
+    /* color:#0b4441b0; */
+    /* color:#7468054b; */
 }
 
 .map-selector:after {
@@ -51,15 +52,15 @@
     position: absolute;
     top: inherit;right: inherit;bottom: inherit;left: inherit;
     background: currentColor;
-    transition-duration: .3s;
+    /* transition-duration: .3s;
     transition-timing-function: ease-out;
-    transition-property: top, left, right, bottom, background;
+    transition-property: top, left, right, bottom, background; */
     pointer-events: none;
 }
 
 [data-title]:hover:after {
     opacity: 1;
-    transition: all 0.1s ease 0.5s;
+    transition: all 0.1s ease 0.2s;
     visibility: visible;
 }
 [data-title]:after {
@@ -84,6 +85,23 @@
 } */
 /* ============================================ */
 
+/* .add-item-icon {
+    left: 10%;
+    bottom: 5%;
+    height: 500px;
+    width: 600px;
+    bottom: 10%;
+    border: 2px soild lawngreen;
+
+}
+.fa-shopping-bag{
+    position: absolute;
+    color: blue;
+    background-color: lawngreen;
+    z-index: 59632;
+} */
+
+/* ================ Closet Doors ================ */
 .closet-door-left1{
     position: absolute;
     left: -5px;
