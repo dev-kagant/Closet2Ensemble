@@ -1,0 +1,7 @@
+emerald green = #0c504a
+gold = rgb(201, 166, 14)
+white
+
+
+font-family: 'Niconne', cursive;
+font-family: 'Oleo Script Swash Caps', cursive;

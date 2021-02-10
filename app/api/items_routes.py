@@ -7,6 +7,5 @@ items_routes = Blueprint('items', __name__)
 
 @items_routes.route('/<category>')
 def getCategory(category):
-    this_category = Category.query.filter_by(categoryName=category).first()
-    print("CATEGORY", this_category.to_dict())
-    # return this_category
+    thisCategory = Category.query.filter(Category.categoryName == category).first()
+    return thisCategory.to_dict()

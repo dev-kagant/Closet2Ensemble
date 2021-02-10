@@ -25,6 +25,9 @@ function App() {
   useEffect(() => {
     (async () => {
       let res = await dispatch(restoreUser())
+      if (res) {
+        history.push(`/closet/${res}`)
+      }
     })();
   }, [dispatch]);
 
@@ -34,11 +37,10 @@ function App() {
       {(authorized) ? (
         <>
           <NavBar />
-          <MyCloset />
           <Switch>
-            {/* <Route path="/closet/:id">
+            <Route path="/">
               <MyCloset />
-            </Route> */}
+            </Route>
             {/* <Route path="/closet/:closetId/category/:categoryId">
               <CategoryDisplayModal />
             </Route> */}

@@ -32,8 +32,8 @@ class Item(db.Model):
             "purchasedAt": self.purchasedAt,
             "clean": self.clean,
             "datePurchased": self.datePurchased,
-            "lastWorn": self.lasWorn,
-            "timesworn": self.timesWorm,
+            "lastWorn": self.lastWorn,
+            "timesWorn": self.timesWorn,
             "borrowedId": self.borrowedId,
             "created": self.created,
             "updated": self.updated

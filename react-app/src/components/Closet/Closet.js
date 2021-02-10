@@ -67,7 +67,7 @@ const MyCloset = () => {
                 <div className="map-selector"></div>
             </div>
             <map name="closet-sections" id="image-map">
-                <area data-title="Jackets" alt="Jackets-top" shape="rect" coords="260,100,430,320" onClick={handleCategory} />
+                <area data-title="Jackets" alt="Jackets" shape="rect" coords="260,100,430,320" onClick={handleCategory} />
                 <area data-title="Sweaters" alt="Sweaters" shape="rect" coords="440,59,595,236" href="" />
                 <area data-title="Bottoms" alt="Bottoms" shape="rect" coords="260,340,425,540" href="" />
                 <area data-title="Dresses" alt="Dresses-left" shape="rect" coords="615,340,780,600" href="" />
@@ -83,7 +83,7 @@ const MyCloset = () => {
                 <area data-title="Shoes" alt="Shoes-right" shape="rect" coords="900,180,970,235" href="" />
                 <area data-title="Handbags" alt="Handbags-right" shape="rect" coords="800,60,940,230" href="" />
                 <area data-title="Shoes" alt="Shoe-single" shape="rect" coords="790,235,970,320" href="" />
-                <area data-title="Pajamas and Tees" alt="PajamasTees" shape="rect" coords="70,320,250,600" href="" />
+                <area data-title="Pajamas" alt="PajamasTees" shape="rect" coords="70,320,250,600" href="" />
                 <area data-title="Undergarments" alt="Undergarments" shape="rect" coords="792,320,975,600" href="" />
             </map>
             <div>

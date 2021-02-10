@@ -13,6 +13,6 @@ class SubCategory(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "subCategoryName": self.categoryName,
+            "subCategoryName": self.subCategoryName,
             "items": [item.to_dict() for item in self.items]
         }

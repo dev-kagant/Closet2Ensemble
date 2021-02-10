@@ -9,12 +9,10 @@ const CATEGORY_ITEMS = "category/CATEGORY_ITEMS";
 
 // =========== POJO Actions ==============
 
-const currentCategory = (categoryItems) => {
-    return {
-        type: CATEGORY_ITEMS,
-        payload: categoryItems,
-    };
-};
+const currentCategory = (categoryItems) => ({
+    type: CATEGORY_ITEMS,
+    payload: categoryItems,
+});
 
 // =========== Thunk Actions ==============
 export const setCategory = (category) => async (dispatch) => {
@@ -25,13 +23,14 @@ export const setCategory = (category) => async (dispatch) => {
         }
     })
     if (response.ok) {
-        const categoryItems = response.json()
-        dispatch(currentCategory(categoryItems))
+        const categoryItems = await response.json()
+        await dispatch(currentCategory(categoryItems))
     }
 }
 // =========== Reducers Function ==============
 
 const categoryReducer = (state = initialState, action) => {
+    console.log("We'll see", action.type)
     switch (action.type) {
         case CATEGORY_ITEMS:
             return {
@@ -41,3 +40,5 @@ const categoryReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+export default categoryReducer;
