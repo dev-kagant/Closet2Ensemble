@@ -1,0 +1,47 @@
+from app.models import db, Style
+
+def seed_styles():
+
+    Office = Style(styleType='Office')
+    Preppy = Style(styleType='Preppy')
+    Punk = Style(styleType='Punk')
+    Trendy = Style(styleType='Trendy')
+    Artsy = Style(styleType='Artsy')
+    Vintage = Style(styleType='Vintage')
+    Grunge = Style(styleType='Grunge')
+    Bohemian = Style(styleType='Bohemian')
+    Sporty = Style(styleType='Sporty')
+    Tomboy = Style(styleType='Tomboy')
+    Sexy = Style(styleType='Sexy')
+    Casual = Style(styleType='Casual')
+    Sophisticated = Style(styleType='Sophisticated')
+    Street = Style(styleType='Street')
+    Chic = Style(styleType='Chic')
+    Goth = Style(styleType='Goth')
+    Rocker = Style(styleType='Rocker')
+    Androgynous = Style(styleType='Androgynous')
+
+    db.session.add(Office)
+    db.session.add(Preppy)
+    db.session.add(Punk)
+    db.session.add(Trendy)
+    db.session.add(Artsy)
+    db.session.add(Vintage)
+    db.session.add(Grunge)
+    db.session.add(Bohemian)
+    db.session.add(Sporty)
+    db.session.add(Tomboy)
+    db.session.add(Sexy)
+    db.session.add(Casual)
+    db.session.add(Sophisticated)
+    db.session.add(Street)
+    db.session.add(Chic)
+    db.session.add(Goth)
+    db.session.add(Rocker)
+    db.session.add(Androgynous)
+
+    db.session.commit()
+
+def undo_styles():
+    db.session.execute('TRUNCATE styles;')
+    db.session.commit()

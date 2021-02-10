@@ -9,7 +9,7 @@ const initialState = {
 const IS_AUTHENTICATED = "user/IS_AUTHENTICATED";
 const NOT_AUTHENTICATED = "user/NOT_AUTHENTICATED";
 const SET_CLOSET_OWNER = 'user/SET_CLOSET_OWNER';
-const REMOVE_USER = 'user/removeUser';
+const REMOVE_CLOSET_OWNER = 'user/removeUser';
 
 //================== POJO Actions ==========================
 const setClosetOwner = (user) => {
@@ -21,32 +21,21 @@ const setClosetOwner = (user) => {
 
 const removeClosetOwner = () => {
     return {
-        type: REMOVE_USER,
+        type: REMOVE_CLOSET_OWNER,
     };
 };
 
-export const isAuthenticated = () => ({
+const isAuthenticated = () => ({
     type: IS_AUTHENTICATED,
     payload: true
 })
 
-export const notAuthenticated = () => ({
+const notAuthenticated = () => ({
     type: NOT_AUTHENTICATED,
     payload: false
 })
 
 // =================== Action Thunks ======================
-
-// export const logout = async () => {
-//     const response = await fetch("/api/auth/logout", {
-//         headers: {
-//             "Content-Type": "application/json",
-//         }
-//     });
-//     return await response.json();
-// };
-
-//========================================================
 
 export const authenticate = async () => {
     const response = await fetch('/api/auth/', {
@@ -118,7 +107,8 @@ export const restoreUser = () => async dispatch => {
     if (res.ok) {
         const data = await res.json()
         await dispatch(setClosetOwner(data));
-        await dispatch(isAuthenticated())
+        await dispatch(isAuthenticated());
+        return data.id
     }
 };
 
@@ -141,7 +131,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 authenticated: action.payload
             };
-        case REMOVE_USER:
+        case REMOVE_CLOSET_OWNER:
             return {
                 state: initialState    // Check that this is possible?
             }
