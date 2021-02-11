@@ -10,16 +10,15 @@ const CategoryDisplay = () => {
     const history = useHistory();
     const closetOwner = useSelector(state => state.user.closetOwner);
     const sectionCategory = useSelector(state => state.category.category)
-    const [categoryItems, setCategoryItems] = useState([]);
-    const [subCategories, setSubCategories] = useState([]);
+    const [categoryItems, setCategoryItems] = useState([])
+    const [subCate, setSubCate] = useState([]);
     const [colors, setColors] = useState([]);
     const [styles, setStyles] = useState([]);
     const [weathers, setWeathers] = useState([]);
 
     useEffect(() => {
-        return sectionCategory
-    }, [dispatch])
-    console.log(sectionCategory)
+        setCategoryItems(sectionCategory.subCategories)
+    }, []);
 
     const handleChangeSubCat = (e) => { }
     const handleChangeColor = (e) => { }
@@ -28,24 +27,33 @@ const CategoryDisplay = () => {
     const handleChangeClean = (e) => { }
 
 
+
+
+    // console.log("TESTING", sectionCategory)
+    console.log("TESTING", sectionCategory.subCategories)
+
+    // const [categoryItems, setCategoryItems] = sectionCategory.subCategories
+    // setCategoryItems(sectionCategory.subCategories)
+    console.log(categoryItems)
+
     return (
         <div className="category-display-modal">
-            <h1 className="category-display_header">{sectionCategory}</h1>
+            <h1 className="category-display_header">{sectionCategory.categoryName}</h1>
             <div className="category-display_body">
                 <div className="category-display_items">
                     <ul>
-                        {categoryItems.map(item => (
+                        {/* {categoryItems.map(item => (
                             <li>
                                 <Link to={`/closet/${closetOwner.id}/category/${item.id}`}></Link>
                             </li>
-                        ))}
+                        ))} */}
                     </ul>
                 </div >
                 <div className="category-display_filters">
                     <div>Filter Items</div>
                     <label>Sub-Category:</label>
                     <select id='Sub-Category' onChange={handleChangeSubCat}>
-                        {subCategories.map(subCat => (
+                        {subCate.map(subCat => (
                             <option>{subCat}</option>
                         ))}
                     </select>

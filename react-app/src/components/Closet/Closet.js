@@ -26,31 +26,33 @@ const MyCloset = () => {
     //     return null
     // }
 
-    const handleCategory = (e) => {
+    const handleCategory = async (e) => {
         console.log(e.target.alt)
-        dispatch(setCategory(e.target.alt))
+        await dispatch(setCategory(e.target.alt))
         setShowModal(true)
+        // setTimeout(() => {
+        // }, 2000);
     }
 
 
     // ============ Only necessary if I want an effect on the image map ===================
     const hoverEffect = () => {
-        // $('#image-map area').hover(
-        //     function () {
-        //         var coords = $(this).attr('coords').split(','),
-        //             width = $('.closet-container').width(),
-        //             height = $('.closet-container').height();
-        //         $('.closet-container .map-selector').addClass('hover').css({
-        //             'left': coords[0] + 'px',
-        //             'top': coords[1] + 'px',
-        //             'right': width - coords[2],
-        //             'bottom': height - coords[3]
-        //         })
-        //     },
-        //     function () {
-        //         $('.closet-container .map-selector').removeClass('hover').attr('style', '');
-        //     }
-        // )
+        $('#image-map area').hover(
+            function () {
+                var coords = $(this).attr('coords').split(','),
+                    width = $('.closet-container').width(),
+                    height = $('.closet-container').height();
+                $('.closet-container .map-selector').addClass('hover').css({
+                    'left': coords[0] + 'px',
+                    'top': coords[1] + 'px',
+                    'right': width - coords[2],
+                    'bottom': height - coords[3]
+                })
+            },
+            function () {
+                $('.closet-container .map-selector').removeClass('hover').attr('style', '');
+            }
+        )
     }
     // =========================================================================================
 

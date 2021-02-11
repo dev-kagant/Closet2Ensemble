@@ -43,8 +43,8 @@
     transition-property: top, left, right, bottom, color; */
 }
 .closet-container .map-selector.hover {
-    /* color:#0b4441b0; */
-    /* color:#7468054b; */
+    color:#0b4441b0;
+    color:#7468054b;
 }
 
 .map-selector:after {
@@ -52,6 +52,7 @@
     position: absolute;
     top: inherit;right: inherit;bottom: inherit;left: inherit;
     background: currentColor;
+    box-shadow: 3px 3px 5px orange;
     /* transition-duration: .3s;
     transition-timing-function: ease-out;
     transition-property: top, left, right, bottom, background; */
