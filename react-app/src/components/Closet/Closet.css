@@ -42,21 +42,24 @@
     transition-timing-function: ease-out;
     transition-property: top, left, right, bottom, color; */
 }
-.closet-container .map-selector.hover {
+/* .closet-container .map-selector.hover {
     color:#0b4441b0;
     color:#7468054b;
-}
+} */
 
+/* .map-selector #image-map::after {
+    box-shadow: 3px 3px 3em 1em rgba(165, 149, 3, 0.651);
+} */
 .map-selector:after {
-    content: '';
+    /* content: '';
     position: absolute;
     top: inherit;right: inherit;bottom: inherit;left: inherit;
     background: currentColor;
-    box-shadow: 3px 3px 5px orange;
-    /* transition-duration: .3s;
+    box-shadow: 1px 1px 3em 1em rgba(8, 80, 46, 0.37);
+    transition-duration: .3s;
     transition-timing-function: ease-out;
-    transition-property: top, left, right, bottom, background; */
-    pointer-events: none;
+    transition-property: top, left, right, bottom, background;
+    pointer-events: none; */
 }
 
 [data-title]:hover:after {
@@ -86,21 +89,49 @@
 } */
 /* ============================================ */
 
-/* .add-item-icon {
+.add-item-icon {
+    position: absolute;
     left: 10%;
-    bottom: 5%;
-    height: 500px;
-    width: 600px;
-    bottom: 10%;
-    border: 2px soild lawngreen;
+    bottom: 0%;
+    border: 5px soild lawngreen;
+    z-index: 59632;
 
 }
 .fa-shopping-bag{
-    position: absolute;
-    color: blue;
-    background-color: lawngreen;
-    z-index: 59632;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(33, 51, 45);
+    background-color: rgba(255, 255, 255, 0.753);
+    border:3px solid rgb(201, 166, 14);
+    border-radius: 2em;
+    font-size: 40px;
+    height: 70px;
+    width: 70px;
+}
+/* .fa-tags{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(33, 51, 45);
+    background-color: rgba(255, 255, 255, 0.753);
+    border:3px solid rgb(201, 166, 14);
+    border-radius: 2em;
+    font-size: 40px;
+    height: 70px;
+    width: 70px;
 } */
+/* .fa-plus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgba(245, 245, 245, 0.76);
+    border-radius: 2em;
+    font-size: 40px;
+    height: 70px;
+    width: 70px;
+} */
+
 
 /* ================ Closet Doors ================ */
 .closet-door-left1{

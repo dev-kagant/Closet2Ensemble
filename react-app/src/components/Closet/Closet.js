@@ -7,7 +7,6 @@ import { setCategory } from '../../store/category'
 import $ from 'jquery';
 import theCloset from '../../images/okthistime.jpg';
 import theDoor from '../../images/theGreenestDoor.jpg';
-// import theBags from '../../images/hanger-silhouettes-hangers-clothes-fashion-equipment-isolated-transparent-retail-boutique-wardrobe-house-hang-out-metal-racks-with-hooks-coat-dress-pants-shirt-vector_81894-4216 (2).jpg'
 import "./Closet.css";
 import CategoryDisplay from '../Items/CategoryDisplay/CategoryDisplay';
 
@@ -30,29 +29,28 @@ const MyCloset = () => {
         console.log(e.target.alt)
         await dispatch(setCategory(e.target.alt))
         setShowModal(true)
-        // setTimeout(() => {
-        // }, 2000);
+
     }
 
 
     // ============ Only necessary if I want an effect on the image map ===================
     const hoverEffect = () => {
-        $('#image-map area').hover(
-            function () {
-                var coords = $(this).attr('coords').split(','),
-                    width = $('.closet-container').width(),
-                    height = $('.closet-container').height();
-                $('.closet-container .map-selector').addClass('hover').css({
-                    'left': coords[0] + 'px',
-                    'top': coords[1] + 'px',
-                    'right': width - coords[2],
-                    'bottom': height - coords[3]
-                })
-            },
-            function () {
-                $('.closet-container .map-selector').removeClass('hover').attr('style', '');
-            }
-        )
+        // $('#image-map area').hover(
+        //     function () {
+        //         var coords = $(this).attr('coords').split(','),
+        //             width = $('.closet-container').width(),
+        //             height = $('.closet-container').height();
+        //         $('.closet-container .map-selector').addClass('hover').css({
+        //             'left': coords[0] + 'px',
+        //             'top': coords[1] + 'px',
+        //             'right': width - coords[2],
+        //             'bottom': height - coords[3]
+        //         })
+        //     },
+        //     function () {
+        //         $('.closet-container .map-selector').removeClass('hover').attr('style', '');
+        //     }
+        // )
     }
     // =========================================================================================
 
@@ -70,23 +68,23 @@ const MyCloset = () => {
             </div>
             <map name="closet-sections" id="image-map">
                 <area data-title="Jackets" alt="Jackets" shape="rect" coords="260,100,430,320" onClick={handleCategory} />
-                <area data-title="Sweaters" alt="Sweaters" shape="rect" coords="440,59,595,236" href="" />
-                <area data-title="Bottoms" alt="Bottoms" shape="rect" coords="260,340,425,540" href="" />
-                <area data-title="Dresses" alt="Dresses-left" shape="rect" coords="615,340,780,600" href="" />
-                <area data-title="Dresses" alt="Dresses-center" shape="rect" coords="445,260,507,535" href="" />
-                <area data-title="Accessories" alt="Accessories-basket" shape="rect" coords="340,540,415,600" href="" />
-                <area data-title="Shoes" alt="Shoes-bottom" shape="rect" coords="265,555,335,600" href="" />
-                <area data-title="Handbags" alt="Handbags-below" shape="rect" coords="445,535,600,600" href="" />
-                <area data-title="Jackets" alt="Jackets-center" shape="rect" coords="535,255,595,530" href="" />
-                <area data-title="Tops" alt="Tops" shape="rect" coords="615,100,780,320" href="" />
-                <area data-title="Accessories" alt="sunglasses" shape="rect" coords="130,210,160,230" href="" />
-                <area data-title="Handbags" alt="Handbags-left" shape="rect" coords="80,80,250,230" href="" />
-                <area data-title="Shoes" alt="Shoes-left" shape="rect" coords="80,235,250,320" href="" />
-                <area data-title="Shoes" alt="Shoes-right" shape="rect" coords="900,180,970,235" href="" />
-                <area data-title="Handbags" alt="Handbags-right" shape="rect" coords="800,60,940,230" href="" />
-                <area data-title="Shoes" alt="Shoe-single" shape="rect" coords="790,235,970,320" href="" />
-                <area data-title="Pajamas" alt="PajamasTees" shape="rect" coords="70,320,250,600" href="" />
-                <area data-title="Undergarments" alt="Undergarments" shape="rect" coords="792,320,975,600" href="" />
+                <area data-title="Sweaters" alt="Sweaters" shape="rect" coords="440,59,595,236" onClick={handleCategory} />
+                <area data-title="Bottoms" alt="Bottoms" shape="rect" coords="260,340,425,540" onClick={handleCategory} />
+                <area data-title="Dresses" alt="Dresses" shape="rect" coords="615,340,780,600" onClick={handleCategory} />
+                <area data-title="Dresses" alt="Dresses" shape="rect" coords="445,260,507,535" onClick={handleCategory} />
+                <area data-title="Accessories" alt="Accessories" shape="rect" coords="340,540,415,600" onClick={handleCategory} />
+                <area data-title="Shoes" alt="Shoes" shape="rect" coords="265,555,335,600" onClick={handleCategory} />
+                <area data-title="Handbags" alt="Handbags" shape="rect" coords="445,535,600,600" onClick={handleCategory} />
+                <area data-title="Jackets" alt="Jackets" shape="rect" coords="535,255,595,530" onClick={handleCategory} />
+                <area data-title="Tops" alt="Tops" shape="rect" coords="615,100,780,320" onClick={handleCategory} />
+                <area data-title="Accessories" alt="Accessories" shape="rect" coords="130,210,160,230" onClick={handleCategory} />
+                <area data-title="Handbags" alt="Handbags" shape="rect" coords="80,80,250,230" onClick={handleCategory} />
+                <area data-title="Shoes" alt="Shoes" shape="rect" coords="80,235,250,320" onClick={handleCategory} />
+                <area data-title="Shoes" alt="Shoes" shape="rect" coords="900,180,970,235" onClick={handleCategory} />
+                <area data-title="Handbags" alt="Handbags" shape="rect" coords="800,60,940,230" onClick={handleCategory} />
+                <area data-title="Shoes" alt="Shoes" shape="rect" coords="790,235,970,320" onClick={handleCategory} />
+                <area data-title="Pajamas" alt="Pajamas" shape="rect" coords="70,320,250,600" onClick={handleCategory} />
+                <area data-title="Undergarments" alt="Undergarments" shape="rect" coords="792,320,975,600" onClick={handleCategory} />
             </map>
             <div>
                 <img alt="Closet Door" src={theDoor} className="closet-door-left30" />
@@ -106,9 +104,9 @@ const MyCloset = () => {
             <div>
                 <img alt="Closet Door" src={theDoor} className="closet-door-right10" />
             </div>
-            {/* <div className="add-item-icon"><i class="fas fa-shopping-bag"></i></div> */}
-            {/* <div ><img scr={theBags} className="add-item-icon" /></div> */}
-            {/* <div ><img scr={theBags} className="add-item-icon" /></div> */}
+            <div className="add-item-icon"><i class="fas fa-shopping-bag"></i></div>
+            {/* <div className="add-item-icon"><i class="fas fa-plus"></i></div> */}
+            {/* <div className="add-item-icon"><i class="fas fa-tags"></i></div> */}
         </div>
     )
 }

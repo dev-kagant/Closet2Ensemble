@@ -1,6 +1,9 @@
 // =========== Initial State ==============
 const initialState = {
-    category: null
+    category: null,
+    colors: null,
+    weather: null,
+    style: null
 }
 
 // =========== Action Types ==============
@@ -11,7 +14,7 @@ const CATEGORY_ITEMS = "category/CATEGORY_ITEMS";
 
 const currentCategory = (categoryItems) => ({
     type: CATEGORY_ITEMS,
-    payload: categoryItems,
+    categoryItems,
 });
 
 // =========== Thunk Actions ==============
@@ -34,8 +37,12 @@ const categoryReducer = (state = initialState, action) => {
     switch (action.type) {
         case CATEGORY_ITEMS:
             return {
-                category: action.payload
+                category: action.categoryItems
             }
+        // case ALL_CATEGORY_ITEMS:
+        //     return {
+        //         items:
+        //     }
         default:
             return state;
     }
