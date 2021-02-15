@@ -8,7 +8,7 @@ from .styles import seed_styles, undo_styles
 from .colors import seed_colors, undo_colors
 from .sizes import seed_sizes, undo_sizes
 from .borrowed import seed_borrow, undo_borrow
-# from .joins import seed_joins, undo_joins
+from .joins import seed_joins, undo_joins
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -26,7 +26,7 @@ def seed():
     seed_weather()
     seed_colors()
     seed_items()
-    # seed_joins()
+    seed_joins()
 
     # Add other seed functions here
 
@@ -42,5 +42,5 @@ def undo():
     undo_styles()
     undo_colors()
     undo_items()
-    # undo_joins()
+    undo_joins()
     # Add other undo functions here

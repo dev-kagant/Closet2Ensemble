@@ -33,7 +33,6 @@ export const setCategory = (category) => async (dispatch) => {
 // =========== Reducers Function ==============
 
 const categoryReducer = (state = initialState, action) => {
-    console.log("We'll see", action.type)
     switch (action.type) {
         case CATEGORY_ITEMS:
             return {

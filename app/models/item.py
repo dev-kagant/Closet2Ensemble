@@ -21,6 +21,7 @@ class Item(db.Model):
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -36,5 +37,5 @@ class Item(db.Model):
             "timesWorn": self.timesWorn,
             "borrowedId": self.borrowedId,
             "created": self.created,
-            "updated": self.updated
+            "updated": self.updated,
         }

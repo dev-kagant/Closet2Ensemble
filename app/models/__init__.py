@@ -6,6 +6,6 @@ from .subcategory import SubCategory
 from .size import Size
 from .weather import Weather, theWeather
 from .style import Style, itemStyle
-from .color import Color, itemColor
+from .color import Color, itemColors
 from .borrowed import Borrowed
 from .outfit import Outfit

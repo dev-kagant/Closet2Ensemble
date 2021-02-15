@@ -50,6 +50,7 @@
 /* .map-selector #image-map::after {
     box-shadow: 3px 3px 3em 1em rgba(165, 149, 3, 0.651);
 } */
+
 .map-selector:after {
     /* content: '';
     position: absolute;

@@ -7,39 +7,38 @@ import './CategoryDisplay.css'
 
 const CategoryDisplay = () => {
     const dispatch = useDispatch();
-    // const history = useHistory();
+
     const closetOwner = useSelector(state => state.user.closetOwner);
     const sectionCategory = useSelector(state => state.category.category)
+
     const [originalCategoryItems, setOriginalCategoryItems] = useState([])
     const [categoryItems, setCategoryItems] = useState(null)
-    // const getItems = useSelector(state => state.category.category.subCategories)
     const [subCate, setSubCate] = useState([]);
     const [colors, setColors] = useState([]);
     const [styles, setStyles] = useState([]);
     const [weathers, setWeathers] = useState([]);
-    const [subCateId, setSubCateId] = useState("-- Select One --");
-    const [colorId, setColorId] = useState("-- Select One --");
-    const [styleId, setStyleId] = useState(null);
-    const [weatherId, setWeatherId] = useState(null);
+    const [subCateId, setSubCateId] = useState("- - Select One - -");
+    const [colorId, setColorId] = useState("- - Select One - -");
+    const [styleId, setStyleId] = useState("- - Select One - -");
+    const [weatherId, setWeatherId] = useState("- - Select One - -");
 
-    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         if (!sectionCategory) {
             return
         }
+        setCategoryItems(allItems(sectionCategory.subCategories))
+        setOriginalCategoryItems(allItems(sectionCategory.subCategories))
         setSubCate(sectionCategory.subCategories)
         getColors()
-        // setSubCateId(getIds(sectionCategory.subCategories))
         getStyles()
         getWeather()
-        setOriginalCategoryItems(allItems(sectionCategory.subCategories))
-        setCategoryItems(allItems(sectionCategory.subCategories))
     }, []);
 
-    console.log("STYLINGS", styles)
-
     useEffect(() => {
+        if (!categoryItems) {
+            return
+        }
         changeItemsViewed()
     }, [subCateId, colorId, styleId, weatherId])
 
@@ -52,7 +51,6 @@ const CategoryDisplay = () => {
     }
 
     const getColors = async () => {
-        console.log("WE IN COLORS")
         const response = await fetch("/api/items/colors")
         if (response.ok) {
             const theColors = await response.json()
@@ -60,7 +58,6 @@ const CategoryDisplay = () => {
         }
     }
     const getStyles = async () => {
-        console.log("WE IN COLORS")
         const response = await fetch("/api/items/styles")
         if (response.ok) {
             const theStyles = await response.json()
@@ -68,48 +65,41 @@ const CategoryDisplay = () => {
         }
     }
     const getWeather = async () => {
-        console.log("WE IN COLORS")
         const response = await fetch("/api/items/weather")
         if (response.ok) {
             const theWeather = await response.json()
-            console.log("WE GOT STYLES", theWeather)
             return setWeathers(theWeather.weather)
         }
     }
 
-    // const getIds = (filters) => {
-    //     let allIds = [];
-    //     for (let i = 0; i < filters.length; i++) {
-    //         allIds.push(filters[i].id)
-    //     }
-    //     return allIds
-    // }
+    const handleChangeColor = (e) => {
+        for (let i = 0; i < colors.length; i++) {
+            if (colors[i].id == e.target.value) {
+                return setColorId(colors[i])
+            }
+        }
+        setColorId(e.target.value)
+    }
 
-    // const handleChangeSubCate = (e) => {
-    //     setErrors([]);
-    //     return dispatch(setSubCateId(e.target.value))
-    //         .then((res) => subCateId)
-    //         .then(() => changeItemsViewed())
-    //         .catch((res) => {
-    //             if (res.data && res.data.errors) setErrors(res.data.errors);
-    //         })
-    //     // console.log("Maybe", subCateId)
-    //     // console.log("Okay", e.target.value)
-    //     // changeItemsViewed(e.target.value, colorId, styleId, weatherId)
-    // }
-    // console.log("Checking", subCateId)
-    // const handleChangeColor = (e) => {
-    //     // changeItemsViewed(_, e.target.value)
-    // }
-    // const handleChangeStyle = (e) => {
-    //     // changeItemsViewed(_, _, e.target.value)
-    // }
-    // const handleChangeWeather = (e) => {
-    //     // changeItemsViewed(_, _, _, e.target.value)
-    // }
+    const handleChangeStyle = (e) => {
+        for (let i = 0; i < styles.length; i++) {
+            if (styles[i].id == e.target.value) {
+                return setStyleId(styles[i])
+            }
+        }
+        setStyleId(e.target.value)
+    }
+
+    const handleChangeWeather = (e) => {
+        for (let i = 0; i < weathers.length; i++) {
+            if (weathers[i].id == e.target.value) {
+                return setWeatherId(weathers[i])
+            }
+        }
+        setWeatherId(e.target.value)
+    }
+
     const handleChangeClean = (e) => { }
-
-    // const changeItemsViewed = (subCateId, colors, weather, style) => {
 
     const changeItemsViewed = () => {
         const itemsViewed = originalCategoryItems;
@@ -117,22 +107,35 @@ const CategoryDisplay = () => {
         for (let i = 0; i < itemsViewed.length; i++) {
             if (subCateId && itemsViewed[i].subCategoryId == subCateId) {
                 itemsReturned.push(itemsViewed[i])
-            } else if (colorId && itemsViewed[i].colorId == colorId) {
-                itemsReturned.push(itemsViewed[i])
-            } else if (styleId && itemsViewed[i].styleId == styleId) {
-                itemsReturned.push(itemsViewed[i])
-            } else if (weatherId && itemsViewed[i].weatherId == weatherId) {
-                itemsReturned.push(itemsViewed[i])
+            } else if (colorId !== "- - Select One - -" && colorId.items.length !== 0) {
+                for (let c = 0; c < colorId.items.length; c++) {
+                    if (colorId.items[c].id === itemsViewed[i].id) {
+                        itemsReturned.push(itemsViewed[i])
+                    }
+                }
+            } else if (styleId !== "- - Select One - -" && styleId.items.length !== 0) {
+                for (let s = 0; s < styleId.items.length; s++) {
+                    if (styleId.items[s].id === itemsViewed[i].id) {
+                        itemsReturned.push(itemsViewed[i])
+                    }
+                }
+            } else if (weatherId !== "- - Select One - -" && weatherId.items.length !== 0) {
+                for (let w = 0; w < weatherId.items.length; w++) {
+                    if (weatherId.items[w].id === itemsViewed[i].id) {
+                        itemsReturned.push(itemsViewed[i])
+                    }
+                }
             }
         }
-        if ((subCateId === '- - Select One - -') && (colorId === '- - Select One - -')) {
+        if ((subCateId === '- - Select One - -') &&
+            (colorId === '- - Select One - -') &&
+            (styleId === '- - Select One - -') &&
+            (weatherId === '- - Select One - -')) {
             return setCategoryItems(originalCategoryItems)
         }
-        // return setCategoryItems(itemsReturned)
+        return setCategoryItems(itemsReturned)
     }
 
-
-    console.log("SOME ITEMS", categoryItems)
 
     return (
         <div className="category-display-modal">
@@ -152,28 +155,28 @@ const CategoryDisplay = () => {
                 <form className="category-display_filters" >
                     <div>Filter Items</div>
                     <label>Sub-Category:</label>
-                    <select id='Sub-Category' onChange={(e) => setSubCateId(e.target.value)}>
+                    <select id='Sub-Category' onChange={(e) => { setSubCateId(e.target.value) }}>
                         <option>- - Select One - -</option>
                         {subCate.map(subCat => (
                             <option value={subCat.id}>{subCat.subCategoryName}</option>
                         ))}
                     </select>
                     <label>Color:</label>
-                    <select onChange={(e) => setColorId(e.target.value)}>
+                    <select onChange={handleChangeColor}>
                         <option>- - Select One - -</option>
                         {colors.map(color => (
                             <option value={color.id}>{color.color}</option>
                         ))}
                     </select>
                     <label>Style:</label>
-                    <select onChange={(e) => setStyleId(e.target.value)}>
+                    <select onChange={handleChangeStyle}>
                         <option>- - Select One - -</option>
                         {styles.map(style => (
                             <option value={style.id}>{style.styleType}</option>
                         ))}
                     </select>
                     <label>Weather:</label>
-                    <select onChange={(e) => setWeatherId(e.target.value)}>
+                    <select onChange={handleChangeWeather}>
                         <option>- - Select One - -</option>
                         {weathers.map(weather => (
                             <option value={weather.id}>{weather.weatherType}</option>

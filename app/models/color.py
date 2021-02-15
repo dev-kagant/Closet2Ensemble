@@ -1,10 +1,10 @@
 from .db import db
 
 
-itemColor = db.Table(
+itemColors = db.Table(
     'itemColors',
-    db.Column('colorId', db.Integer, db.ForeignKey('colors.id'), nullable=False),
-    db.Column('itemId', db.Integer, db.ForeignKey('items.id'), nullable=False)
+    db.Column('colorId', db.Integer, db.ForeignKey('colors.id')),
+    db.Column('itemId', db.Integer, db.ForeignKey('items.id'))
 )
 
 
@@ -13,8 +13,10 @@ class Color(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     color = db.Column(db.String(50), nullable=False)
-    items = db.relationship("Item", secondary=itemColor,
-                            backref=db.backref("colors", lazy="dynamic"))
+    # itemId = db.Column(db.Integer, db.ForeignKey("items.id"), nullable=True)
+
+    items = db.relationship("Item", secondary='itemColors', backref=db.backref("colorId", lazy='dynamic'))
+    # items = db.relationship("Item", back_populates="colorId", lazy='dynamic')
 
     def to_dict(self):
         return {

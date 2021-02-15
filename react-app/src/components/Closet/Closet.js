@@ -21,12 +21,8 @@ const MyCloset = () => {
         hoverEffect()
     }, [])
 
-    // if (!loaded) {
-    //     return null
-    // }
 
     const handleCategory = async (e) => {
-        console.log(e.target.alt)
         await dispatch(setCategory(e.target.alt))
         setShowModal(true)
 

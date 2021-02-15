@@ -14,5 +14,5 @@ class SubCategory(db.Model):
         return {
             "id": self.id,
             "subCategoryName": self.subCategoryName,
-            "items": [item.to_dict() for item in self.items]
+            "items": [item.to_dict() for item in self.items],
         }
