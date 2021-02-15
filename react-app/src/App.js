@@ -5,7 +5,6 @@ import { useHistory, Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import LoginFormModal from "./components/C2EAccess/Login";
 import SignUpModal from "./components/C2EAccess/SignUp";
 import MyCloset from "./components/Closet/Closet";
-import CategoryDisplayModal from "./components/Items/CategoryDisplay";
 import NavBar from "./components/NavBar/NavBar";
 import { authenticate, restoreUser } from "./store/user";
 import theDoor from './images/theGreenestDoor.jpg';
@@ -41,9 +40,6 @@ function App() {
             <Route path="/">
               <MyCloset />
             </Route>
-            {/* <Route path="/closet/:closetId/category/:categoryId">
-              <CategoryDisplayModal />
-            </Route> */}
           </Switch>
         </>
       ) : (

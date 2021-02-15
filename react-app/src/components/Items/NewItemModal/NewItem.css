@@ -1,0 +1,13 @@
+.new-items-main{
+    display: grid;
+    border: 4px solid #0c504a;
+    border-radius: 1em;
+    margin-top: 3em;
+    width: 70vw;
+    height: 80vh;
+    background-color: rgba(245, 245, 245, 0.911);
+    grid-template-rows: 1fr 5fr;
+    grid-template-areas:
+    "header"
+    "body"
+}

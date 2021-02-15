@@ -9,3 +9,192 @@ body{
 .no-navbar {
     height: 3em;
 }
+
+
+/* ================ Closet Doors ================ */
+.closet-door-left1{
+    position: absolute;
+    left: -5px;
+    height: 95vh;
+    width: 17%;
+    margin-top: 2px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    /* border-right: 2px solid gray;
+    box-shadow: 3px 0px 1em 1px gray; */
+}
+
+.closet-door-left2{
+    position: absolute;
+    left: 16.5%;
+    height: 95vh;
+    width: 17%;
+    margin-top: 4px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    /* border-right: 2px solid gray;
+    box-shadow: 3px 0px 1em 1px gray; */
+}
+.closet-door-left3{
+    position: absolute;
+    left: 33%;
+    height: 95vh;
+    width: 17%;
+    margin-top: 6px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    /* border-right: 2px solid gray;
+    box-shadow: 3px 0px 1em 1px gray; */
+}
+.closet-door-right3{
+    position: absolute;
+    right: 33%;
+    height: 95vh;
+    width: 17%;
+    margin-top: 6px;
+    border-right: 1px solid rgb(33, 51, 45);
+    box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    /* border-left: 2px solid gray;
+    box-shadow: 3px 0px 1em 1px gray; */
+
+}
+.closet-door-right2{
+    position: absolute;
+    right: 16.5%;
+    height: 95vh;
+    width: 17%;
+    margin-top: 4px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    /* border-left: 2px solid gray;
+    box-shadow: 3px 0px 1em 1px gray; */
+}
+.closet-door-right1{
+    position: absolute;
+    right: -5px;
+    height: 95vh;
+    width: 17%;
+    margin-top: 2px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    /* border-left: 2px solid gray;
+    box-shadow: 3px 0px 1em 1px gray; */
+}
+
+.closet-door-left10{
+    position: absolute;
+    left: -13%;
+    height: 95vh;
+    width: 17%;
+    margin-top: -14px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation-name: sliding1;
+    animation-duration: 3s;
+    /* animation-delay: 2s; */
+    /* border-right: .5px solid gray; */
+    /* box-shadow: 3px 0px 5px .5px rgb(167, 167, 167); */
+}
+
+@keyframes sliding1 {
+    from{left: -5px;}
+    to{left: -13%}
+}
+
+.closet-door-left20{
+    position: absolute;
+    left: -11%;
+    height: 95vh;
+    width: 17%;
+    margin-top: -12px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation-name: sliding2;
+    animation-duration: 3s;
+    /* animation-delay: 1s; */
+    /* border-right: .5px solid gray;
+    box-shadow: 3px 0px 5px .5px rgb(167, 167, 167); */
+
+}
+
+@keyframes sliding2 {
+    from{left: 16.5%;}
+    to{left: -11%}
+}
+
+.closet-door-left30{
+    position: absolute;
+    left: -9%;
+    height: 95vh;
+    width: 17%;
+    margin-top: -10px;
+    border-right: .5px solid rgb(33, 51, 45);
+    box-shadow: 0px 3px 5px .5px rgba(3, 34, 25, 0.753);
+    animation-name: sliding3;
+    animation-duration: 3s;
+    /* border-right: .5px solid gray; */
+    /* box-shadow: 0px 3px 5px 2px gray; */
+
+}
+
+@keyframes sliding3 {
+    from{left: 33%;}
+    to{left: -9%}
+}
+
+.closet-door-right30{
+    position: absolute;
+    right: -9%;
+    height: 95vh;
+    width: 17%;
+    margin-top: -10px;
+    border-left: .5px solid rgb(33, 51, 45);
+    box-shadow: 0px 3px 5px .5px rgba(3, 34, 25, 0.753);
+    animation-name: sliding4;
+    animation-duration: 3s;
+    /* border-left: .5px solid gray; */
+    /* box-shadow: 0px 3px 5px 2px gray; */
+}
+
+@keyframes sliding4 {
+    from{right: 33%;}
+    to{right: -9%}
+}
+
+.closet-door-right20{
+    position: absolute;
+    right: -11%;
+    height: 95vh;
+    width: 17%;
+    margin-top: -12px;
+    border-left: .5px solid rgb(33, 51, 45);
+    box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation-name: sliding5;
+    animation-duration: 3s;
+    /* border-left: .5px solid gray;
+    box-shadow: 3px 0px 5px .5px rgb(167, 167, 167); */
+}
+
+@keyframes sliding5 {
+    from{right: 16.5%;}
+    to{right: -11%}
+}
+
+.closet-door-right10{
+    position: absolute;
+    right: -13%;
+    height: 95vh;
+    width: 17%;
+    margin-top: -14px;
+    border-left: .5px solid rgb(33, 51, 45);
+    box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation-name: sliding6;
+    animation-duration: 3s;
+    /* border-left: .5px solid gray; */
+    /* box-shadow: 3px 0px 5px .5px rgb(167, 167, 167); */
+}
+
+@keyframes sliding6 {
+    from{right: -5px;}
+    to{right: -13%}
+}

@@ -9,11 +9,13 @@ import theCloset from '../../images/okthistime.jpg';
 import theDoor from '../../images/theGreenestDoor.jpg';
 import "./Closet.css";
 import CategoryDisplay from '../Items/CategoryDisplay/CategoryDisplay';
+import NewItems from '../Items/NewItemModal/NewItem';
 
 const MyCloset = () => {
     const currentUserCloset = useSelector(state => state.user.closetOwner);
     const dispatch = useDispatch();
-    const [showModal, setShowModal] = useState(false);
+    const [showCategoryModal, setShowCategoryModal] = useState(false);
+    const [showNewItemModal, setShowNewItemModal] = useState(false);
 
 
     useEffect(() => {
@@ -24,8 +26,11 @@ const MyCloset = () => {
 
     const handleCategory = async (e) => {
         await dispatch(setCategory(e.target.alt))
-        setShowModal(true)
+        setShowCategoryModal(true)
+    }
 
+    const handleNewItems = async () => {
+        setShowNewItemModal(true)
     }
 
 
@@ -53,9 +58,14 @@ const MyCloset = () => {
     return (
 
         <div className="big-closet-container">
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
+            {showCategoryModal && (
+                <Modal onClose={() => setShowCategoryModal(false)}>
                     <CategoryDisplay />
+                </Modal>
+            )}
+            {showNewItemModal && (
+                <Modal onClose={() => setShowNewItemModal(false)}>
+                    <NewItems />
                 </Modal>
             )}
             <div className="closet-container">
@@ -100,7 +110,7 @@ const MyCloset = () => {
             <div>
                 <img alt="Closet Door" src={theDoor} className="closet-door-right10" />
             </div>
-            <div className="add-item-icon"><i class="fas fa-shopping-bag"></i></div>
+            <div className="add-item-icon" onClick={handleNewItems}><i class="fas fa-shopping-bag"></i></div>
             {/* <div className="add-item-icon"><i class="fas fa-plus"></i></div> */}
             {/* <div className="add-item-icon"><i class="fas fa-tags"></i></div> */}
         </div>

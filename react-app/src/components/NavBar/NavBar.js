@@ -7,7 +7,7 @@ import './NavBar.css'
 const NavBar = () => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const currentUserCloset = useSelector(state => state.user.closetOwner);
+  const currentClosetOwner = useSelector(state => state.user.closetOwner);
 
   const onLogout = async () => {
     return await dispatch(logout())
@@ -16,36 +16,36 @@ const NavBar = () => {
 
 
   return (
-    <nav className="">
+    <nav className="navbar-fall">
       <ul className="navbar">
         <li>
-          <NavLink to={`/closet/:id`} exact={true} activeClassName="active">
+          <NavLink to={`/closet/${currentClosetOwner.id}`} exact={true} className="navbar-halo" activeClassName="active">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/search" exact={true} activeClassName="active">
+          <NavLink to="/search" exact={true} className="navbar-halo" activeClassName="active">
             Search
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/closet/:id/planner`} exact={true} activeClassName="active">
+          <NavLink to={`/closet/:id/planner`} className="navbar-halo" exact={true} activeClassName="active">
             Planner
           </NavLink>
         </li>
         <li>
           {/* <NavLink to={`/closet/friend/${friendsCloset.id}`} exact={true} activeClassName="active"> */}
-          <NavLink to="/closet/friend/" exact={true} activeClassName="active">
+          <NavLink to="/closet/friend/" exact={true} className="navbar-halo" activeClassName="active">
             Friends
           </NavLink>
         </li>
         <li>
-          <NavLink to={`/closet/:id/planner`} exact={true} activeClassName="active">
+          <NavLink to={`/closet/:id/planner`} exact={true} className="navbar-halo" activeClassName="active">
             Closet Stats
           </NavLink>
         </li>
         <li>
-          <button type="button" onClick={onLogout}>Logout</button>
+          <div className="logout-div navbar-halo" onClick={onLogout}>Logout</div>
         </li>
       </ul>
     </nav>
