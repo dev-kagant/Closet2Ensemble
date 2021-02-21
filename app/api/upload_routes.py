@@ -1,7 +1,7 @@
 from flask import Blueprint, request
+import os
 import boto3
 from botocore.exceptions import ClientError
-import os
 import uuid
 import logging
 
@@ -23,6 +23,7 @@ BUCKET_NAME = os.environ.get('BUCKET_NAME')
 
 @upload_routes.route('/', methods=['POST'])
 def upload_file(data=None, BUCKET_NAME=BUCKET_NAME, object_name=None):
+    print("IMAGING", request.files)
     data = request.files['image']
     if object_name is None:
         object_name = uuid.uuid4().hex
@@ -31,4 +32,4 @@ def upload_file(data=None, BUCKET_NAME=BUCKET_NAME, object_name=None):
     except ClientError as e:
         logging.error(e)
         return False
-    return {'img_url': f'https://closet2ensemble.s3.amazonaws.com/{object_name}'}
+    return {'img_url': f'https://closettoensemble.s3.amazonaws.com/{object_name}'}

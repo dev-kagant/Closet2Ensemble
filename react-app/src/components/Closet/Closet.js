@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ImageMap from "image-map";
 import { Modal } from "./../Modal/Modal";
-import { setCategory } from '../../store/category'
+import { setCategory, setColors, setSubCategories, setWeather, setStyles, setSizes, setCategories } from '../../store/category'
 import $ from 'jquery';
 import theCloset from '../../images/okthistime.jpg';
 import theDoor from '../../images/theGreenestDoor.jpg';
@@ -11,8 +11,10 @@ import "./Closet.css";
 import CategoryDisplay from '../Items/CategoryDisplay/CategoryDisplay';
 import NewItems from '../Items/NewItemModal/NewItem';
 
+
+
 const MyCloset = () => {
-    const currentUserCloset = useSelector(state => state.user.closetOwner);
+    const currentClosetOwner = useSelector(state => state.user.closetOwner);
     const dispatch = useDispatch();
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showNewItemModal, setShowNewItemModal] = useState(false);
@@ -26,11 +28,21 @@ const MyCloset = () => {
 
     const handleCategory = async (e) => {
         await dispatch(setCategory(e.target.alt))
+        await dispatch(setSubCategories())
+        await dispatch(setColors())
+        await dispatch(setStyles())
+        await dispatch(setWeather())
         setShowCategoryModal(true)
     }
 
     const handleNewItems = async () => {
-        setShowNewItemModal(true)
+        await dispatch(setSubCategories())
+        await dispatch(setColors())
+        await dispatch(setStyles())
+        await dispatch(setWeather())
+        await dispatch(setSizes())
+        await dispatch(setCategories())
+        return setShowNewItemModal(true)
     }
 
 

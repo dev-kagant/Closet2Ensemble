@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from "../../store/user"
@@ -14,12 +14,11 @@ const NavBar = () => {
       .then(() => history.push('/'));
   };
 
-
   return (
     <nav className="navbar-fall">
       <ul className="navbar">
         <li>
-          <NavLink to={`/closet/${currentClosetOwner.id}`} exact={true} className="navbar-halo" activeClassName="active">
+          <NavLink to={`/`} exact={true} className="navbar-halo" activeClassName="active">
             Home
           </NavLink>
         </li>

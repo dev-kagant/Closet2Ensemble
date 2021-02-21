@@ -38,18 +38,18 @@
 .closet-container .map-selector {
     left:0;top:0;right:0;bottom:0;
     color:#546E7A00;
-    /* transition-duration: .3s;
+    transition-duration: .3s;
     transition-timing-function: ease-out;
-    transition-property: top, left, right, bottom, color; */
+    transition-property: top, left, right, bottom, color;
 }
-/* .closet-container .map-selector.hover {
+.closet-container .map-selector.hover {
     color:#0b4441b0;
     color:#7468054b;
-} */
+}
 
-/* .map-selector #image-map::after {
+.map-selector #image-map::after {
     box-shadow: 3px 3px 3em 1em rgba(165, 149, 3, 0.651);
-} */
+}
 
 .map-selector:after {
     /* content: '';
@@ -95,9 +95,8 @@
     left: 10%;
     bottom: 0%;
     border: 5px soild lawngreen;
-    z-index: 59632;
-
 }
+
 .fa-shopping-bag{
     display: flex;
     justify-content: center;
@@ -132,3 +131,32 @@
     height: 70px;
     width: 70px;
 } */
+
+.add-color-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color:rgba(201, 167, 14, 0.466);
+    border: 3.5px solid rgb(33, 51, 45);
+    border-radius: .5em;
+    height: 20vh;
+    width: 15vw
+}
+
+.add-color-modal::placeholder{
+}
+.add-color-modal input{
+    background-color: rgba(201, 167, 14, 0);
+    border: 2px solid black;
+    width: 10vw;
+    font-family: 'Niconne', cursive;
+    font-size: 12pt;
+
+}
+.add-color-modal button{
+    border: 1px solid rgb(33, 51, 45);
+    background-color: rgba(165, 149, 3, 0.651);
+    height: 20px;
+    width: 60px;
+}

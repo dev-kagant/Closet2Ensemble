@@ -13,10 +13,14 @@ const CategoryDisplay = () => {
 
     const [originalCategoryItems, setOriginalCategoryItems] = useState([])
     const [categoryItems, setCategoryItems] = useState(null)
+    // const subCate = useSelector((state) => state.category.subCategories.subCates)
+    const colors = useSelector((state) => state.category.colors.colors)
+    const styles = useSelector((state) => state.category.styles.styles)
+    const weathers = useSelector((state) => state.category.weather.weather)
     const [subCate, setSubCate] = useState([]);
-    const [colors, setColors] = useState([]);
-    const [styles, setStyles] = useState([]);
-    const [weathers, setWeathers] = useState([]);
+    // const [colors, setColors] = useState([]);
+    // const [styles, setStyles] = useState([]);
+    // const [weathers, setWeathers] = useState([]);
     const [subCateId, setSubCateId] = useState("- - Select One - -");
     const [colorId, setColorId] = useState("- - Select One - -");
     const [styleId, setStyleId] = useState("- - Select One - -");
@@ -30,9 +34,7 @@ const CategoryDisplay = () => {
         setCategoryItems(allItems(sectionCategory.subCategories))
         setOriginalCategoryItems(allItems(sectionCategory.subCategories))
         setSubCate(sectionCategory.subCategories)
-        getColors()
-        getStyles()
-        getWeather()
+
     }, []);
 
     useEffect(() => {
@@ -48,28 +50,6 @@ const CategoryDisplay = () => {
             all.push(...subs[i].items)
         }
         return all
-    }
-
-    const getColors = async () => {
-        const response = await fetch("/api/items/colors")
-        if (response.ok) {
-            const theColors = await response.json()
-            return setColors(theColors.colors)
-        }
-    }
-    const getStyles = async () => {
-        const response = await fetch("/api/items/styles")
-        if (response.ok) {
-            const theStyles = await response.json()
-            return setStyles(theStyles.styles)
-        }
-    }
-    const getWeather = async () => {
-        const response = await fetch("/api/items/weather")
-        if (response.ok) {
-            const theWeather = await response.json()
-            return setWeathers(theWeather.weather)
-        }
     }
 
     const handleChangeColor = (e) => {
