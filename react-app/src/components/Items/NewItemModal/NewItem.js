@@ -18,6 +18,7 @@ const NewItems = () => {
     const [description, setDescription] = useState('')
     const [subCategory, setSubCategory] = useState('')
     const [image, setImage] = useState('')
+    const [file, setFile] = useState('')
     const [size, setSize] = useState(null)
     const [purchasedAt, setPurchasedAt] = useState("")
     const [datePurchased, setDatePurchased] = useState("")
@@ -124,6 +125,7 @@ const NewItems = () => {
     }
 
     const readUrl = async (input) => {
+        console.log("OKOKOK", input)
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -131,11 +133,66 @@ const NewItems = () => {
                 $('#imagePreview')
                     .attr('src', e.target.result);
             };
-            console.log("SOMETHING", input.files[0])
             reader.readAsDataURL(input.files[0]);
+            const res = await fetch("/api/upload", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ reader })
+            })
+            console.log("KEEP", res)
         }
     }
 
+    const uploadImage = async (image) => {
+        // e.preventDefault()
+        // let result = await readUrl(image)
+        // console.log("Something to pass the time", result)
+        // if (image.files && image.files[0]) {
+
+        // var reader = new FileReader();
+        // reader.onload = function (evt) {
+        //     console.log(evt.target.result);
+        // };
+        // reader.onload = function (e) {
+        //     $(result = e.target.result);
+        //     console.log("Something is here", result)
+        // };
+        // if (file.name == null) {
+        //     setErrors(["Choose a file"]);
+        //     return;
+        // }
+        // const res = await fetch("/api/upload", {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'image/jpeg'
+        //     },
+        //     body: JSON.stringify({ result: result })
+        // })
+        // console.log("KEEP", res)
+        // if (res.ok)
+        // if (res.data.postUrl) {
+        //     setErrors([]);
+        //     window.fetch(res.data.postUrl,
+        //         {
+        //             method: "PUT",
+        //             headers: {
+        //                 "Content-Type": file.type,
+        //             },
+        //             body: file,
+        //         }
+        //     ).then(() => {
+        //         setFile(null);
+        //         setImage(res.data.getUrl);
+        //     })
+        // }
+        // else if (res.data.error) {
+        //     setErrors([res.data.error]);
+        // }
+
+
+    }
 
     const handleNewItem = (e) => {
         e.preventDefault()
@@ -239,16 +296,18 @@ const NewItems = () => {
                         </div>
                         <div className="new-item-form" onSubmit={handleNewItem}>
                             <div className="image-description">
-                                <div className="add-item_form">
+                                <form onSubmit={uploadImage} className="add-item_form">
                                     <label className="add-item_label">Image</label>
                                     <div className="image-box"><img id="imagePreview" src="" width="100%" height="100%" /></div>
                                     <input
-                                        name="cover"
                                         type="file"
+                                        files={file}
                                         accept=".png,.jpg,.jpeg"
-                                        onChange={(e) => { readUrl(e.target); setImage(e.target.files[0]) }}
+                                        // onChange={async (e) => { await setFile(readUrl(e.target)) }}
+                                        onChange={(e) => { readUrl(e.target); uploadImage(e.target); setFile(e.target.files[0]) }}
                                     />
-                                </div>
+                                    <button type="submit">Upload</button>
+                                </form>
                                 <div className="add-item_form item-description">
                                     <label className="add-item_label">Description</label>
                                     <textarea

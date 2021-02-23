@@ -139,21 +139,22 @@ export const addItem = (itemInfo) => async (dispatch) => {
         weather,
         style } = itemInfo
     console.log("IMAGEONE", image)
-    const saveImage = await fetch("/api/upload/", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            image,
+    // const saveImage = await fetch("/api/upload/upload", {
+    //     method: "POST",
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         image,
 
-        })
-    })
-    let newImage;
-    if (saveImage.ok) {
-        newImage = await saveImage.json()
-    }
-    console.log("IMAGE", newImage.img_url)
+    //     })
+    // })
+    // console.log("COMING BACK", saveImage)
+    // let newImage;
+    // if (saveImage.ok) {
+    //     newImage = await saveImage.json()
+    // }
+    // console.log("IMAGE", newImage.img_url)
     const response = await fetch('/api/items/add', {
         method: "POST",
         headers: {
