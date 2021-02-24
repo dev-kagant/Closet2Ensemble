@@ -134,65 +134,88 @@ const NewItems = () => {
                     .attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
-            const res = await fetch("/api/upload", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ reader })
-            })
-            console.log("KEEP", res)
         }
     }
 
-    const uploadImage = async (image) => {
-        // e.preventDefault()
-        // let result = await readUrl(image)
-        // console.log("Something to pass the time", result)
-        // if (image.files && image.files[0]) {
 
-        // var reader = new FileReader();
-        // reader.onload = function (evt) {
-        //     console.log(evt.target.result);
-        // };
-        // reader.onload = function (e) {
-        //     $(result = e.target.result);
-        //     console.log("Something is here", result)
-        // };
-        // if (file.name == null) {
-        //     setErrors(["Choose a file"]);
-        //     return;
-        // }
-        // const res = await fetch("/api/upload", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'image/jpeg'
-        //     },
-        //     body: JSON.stringify({ result: result })
-        // })
-        // console.log("KEEP", res)
-        // if (res.ok)
-        // if (res.data.postUrl) {
-        //     setErrors([]);
-        //     window.fetch(res.data.postUrl,
-        //         {
-        //             method: "PUT",
-        //             headers: {
-        //                 "Content-Type": file.type,
-        //             },
-        //             body: file,
-        //         }
-        //     ).then(() => {
-        //         setFile(null);
-        //         setImage(res.data.getUrl);
-        //     })
-        // }
-        // else if (res.data.error) {
-        //     setErrors([res.data.error]);
-        // }
+    // ============= THE MESS THAT IS AWS =========================
+
+    // const uploadImage = async (e) => {
+    //     e.preventDefault()
+    //     // let result = await readUrl(image)
+    //     console.log("Something to pass the time", e.target[0].files[0])
+    //     setImage(e.target[0].value)
+    //     const res = await fetch("/api/upload/new", {
+    //         method: "POST",
+    //         // headers: {
+    //         //     // 'Content-Type': 'multipart/form-data'
+    //         //     'Content-Type': 'application/json'
+    //         // },
+    //         // body: e.target[0].value
+    //         body: JSON.stringify({
+    //             file: e.target[0].files[0],
+    //             filename: e.target[0].files[0].name
+    //         })
+    //     })
+    //     if (res.ok) {
+    //         const thisPhoto = await res.json()
+    //         console.log("NEW STUFF", thisPhoto)
+    //         const photo = await fetch(`/api/upload/`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({ photo: thisPhoto })
+    //         })
+    //         if (photo.ok) {
+    //             console.log("THE RESPONSE", photo)
+    //             const showPhoto = await photo.json()
+    //             console.log("THIS", showPhoto.filename)
+    //             setImage(showPhoto)
+    //         }
+    //     }
+    // }
+
+    // if (image.files && image.files[0]) {
+
+    // var reader = new FileReader();
+    // reader.onload = function (evt) {
+    //     console.log(evt.target.result);
+    // };
+    // reader.onload = function (e) {
+    //     $(result = e.target.result);
+    //     console.log("Something is here", result)
+    // };
+    // if (file.name == null) {
+    //     setErrors(["Choose a file"]);
+    //     return;
+    // }
+
+    // console.log("KEEP", res)
+    // if (res.ok)
+    // if (res.data.postUrl) {
+    //     setErrors([]);
+    //     window.fetch(res.data.postUrl,
+    //         {
+    //             method: "PUT",
+    //             headers: {
+    //                 "Content-Type": file.type,
+    //             },
+    //             body: file,
+    //         }
+    //     ).then(() => {
+    //         setFile(null);
+    //         setImage(res.data.getUrl);
+    //     })
+    // }
+    // else if (res.data.error) {
+    //     setErrors([res.data.error]);
+    // }
 
 
-    }
+    // }
+    // ===================== WHERE DOES IT END =======================================
+
 
     const handleNewItem = (e) => {
         e.preventDefault()
@@ -289,25 +312,30 @@ const NewItems = () => {
                             <ItemDisplay />
                         </Modal>
                     )}
-                    <form onSubmit={handleNewItem}>
+                    {/* <form onSubmit={handleNewItem}> */}
+                    <form>
                         <div className="new-item-title">
                             <h1>New to the Closet</h1>
                             <button type="submit">Add Item</button>
                         </div>
-                        <div className="new-item-form" onSubmit={handleNewItem}>
+                        <div className="new-item-form">
+                            {/* <div className="new-item-form" onSubmit={handleNewItem}> */}
                             <div className="image-description">
-                                <form onSubmit={uploadImage} className="add-item_form">
+                                <div className="image-box"></div>
+                                {/* <form enctype="multipart/form-data" className="add-item_form">
+                                    <form action="/api/upload/new" method="post" className="add-item_form">
                                     <label className="add-item_label">Image</label>
-                                    <div className="image-box"><img id="imagePreview" src="" width="100%" height="100%" /></div>
+                                    <div className="image-box"><img id="imagePreview" src={image} width="100%" height="100%" /></div>
                                     <input
                                         type="file"
-                                        files={file}
-                                        accept=".png,.jpg,.jpeg"
-                                        // onChange={async (e) => { await setFile(readUrl(e.target)) }}
-                                        onChange={(e) => { readUrl(e.target); uploadImage(e.target); setFile(e.target.files[0]) }}
+                                        name="file"
+                                    enctype="multipart/form-data"
+                                    accept=".png,.jpg,.jpeg"
+                                        onChange={(e) => {  uploadImage(e.target);setFile(e.target.files[0]) }}
+                                    onChange={(e) => { readUrl(e.target); setFile(e.target.files[0]) }}
                                     />
-                                    <button type="submit">Upload</button>
-                                </form>
+                                    <button type="submit" name="submit">Upload</button>
+                                </form> */}
                                 <div className="add-item_form item-description">
                                     <label className="add-item_label">Description</label>
                                     <textarea

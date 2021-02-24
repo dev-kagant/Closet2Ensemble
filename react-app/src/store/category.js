@@ -155,6 +155,7 @@ export const addItem = (itemInfo) => async (dispatch) => {
     //     newImage = await saveImage.json()
     // }
     // console.log("IMAGE", newImage.img_url)
+
     const response = await fetch('/api/items/add', {
         method: "POST",
         headers: {
