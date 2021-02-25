@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, Item, Color, Weather, Style, Size, Category, SubCategory, Borrowed, db
+from app.models import User, Item, Color, Weather, Style, Size, Category, SubCategory, Borrowed, itemColors, db
 
 
 items_routes = Blueprint('items', __name__)
@@ -66,8 +66,27 @@ def addWeather():
 
 @items_routes.route('/add', methods=['POST'])
 def addNewItem():
-    print("ITEM", request.json['image'])
     item = Item(**request.json)
+    print("NEW-ITEM", item.description)
     db.session.add(item)
     db.session.commit()
     return item.to_dict()
+
+@items_routes.route('/add-to-item', methods=['POST'])
+def addFeatures():
+    if(request.json['color']):
+        item = request.json['newItem']['id']
+        color = request.json['color']
+        print("The Deets", item)
+        color.items.append(item)
+        itemColors.insert().values(colorId=color, itemId=item)
+        # db.session.add(addColor)
+        db.session.commit()
+        return "Finished"
+    # if(request.json['weather']):
+    #     request.json['newItem'].weather.append(request.json['color'])
+    #     db.session.commit()
+
+    # if(request.json['style']):
+    #     request.json['newItem'].styles.append(request.json['style'])
+    #     db.session.commit()

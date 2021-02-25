@@ -5,6 +5,7 @@ import $ from 'jquery';
 import { Modal } from "./../../Modal/Modal";
 import ItemDisplay from "../ItemDisplayModal/ItemDisplay"
 import { addItem } from "../../../store/category";
+import theClothes from "../../../images/clothesCollage.jpg"
 import ItemsNav from "./ItemsNav"
 
 import './NewItem.css'
@@ -17,7 +18,7 @@ const NewItems = () => {
     const [showNewItems, setShowNewItems] = useState(true)
     const [description, setDescription] = useState('')
     const [subCategory, setSubCategory] = useState('')
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState(theClothes)
     const [file, setFile] = useState('')
     const [size, setSize] = useState(null)
     const [purchasedAt, setPurchasedAt] = useState("")
@@ -219,19 +220,10 @@ const NewItems = () => {
 
     const handleNewItem = (e) => {
         e.preventDefault()
-        console.log("The Stuff",
-            ownerId,
-            description,
-            subCategory,
-            image,
-            size,
-            purchasedAt,
-            datePurchased,
-            lastWorn,
-            timesWorn,
-            color,
-            weather,
-            style)
+        console.log("The Stuff", subCategory)
+        // console.log("The Stuff", ownerId, description, subCategory,
+        //     image, size, purchasedAt, datePurchased, lastWorn,
+        //     timesWorn, color, weather, style)
         setErrors([]);
         return dispatch(addItem({
             ownerId,
@@ -312,8 +304,8 @@ const NewItems = () => {
                             <ItemDisplay />
                         </Modal>
                     )}
-                    {/* <form onSubmit={handleNewItem}> */}
-                    <form>
+                    <form onSubmit={handleNewItem}>
+                        {/* <form> */}
                         <div className="new-item-title">
                             <h1>New to the Closet</h1>
                             <button type="submit">Add Item</button>
@@ -321,11 +313,11 @@ const NewItems = () => {
                         <div className="new-item-form">
                             {/* <div className="new-item-form" onSubmit={handleNewItem}> */}
                             <div className="image-description">
-                                <div className="image-box"></div>
+                                <div className="image-box"><img id="imagePreview" src={image} width="100%" height="100%" /></div>
                                 {/* <form enctype="multipart/form-data" className="add-item_form">
+                                <div className="image-box"></div>
                                     <form action="/api/upload/new" method="post" className="add-item_form">
                                     <label className="add-item_label">Image</label>
-                                    <div className="image-box"><img id="imagePreview" src={image} width="100%" height="100%" /></div>
                                     <input
                                         type="file"
                                         name="file"
@@ -350,7 +342,7 @@ const NewItems = () => {
                                 <div className="new-item_columnOne">
                                     <div className="stack-label">
                                         <label>Categorey</label>
-                                        <select onChange={(e) => setCategory(e.target.value)}>
+                                        <select onChange={(e) => setSubCategory(e.target.value)}>
                                             {categories.map(category => (
                                                 <optgroup label={category.categoryName}>
                                                     {category.subCategories.map(subCate => (

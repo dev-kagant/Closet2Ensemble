@@ -138,7 +138,7 @@ export const addItem = (itemInfo) => async (dispatch) => {
         color,
         weather,
         style } = itemInfo
-    console.log("IMAGEONE", image)
+    console.log("IMAGEONE", itemInfo)
     // const saveImage = await fetch("/api/upload/upload", {
     //     method: "POST",
     //     headers: {
@@ -172,15 +172,27 @@ export const addItem = (itemInfo) => async (dispatch) => {
             datePurchased,
             lastWorn,
             timesWorn,
-            colorId: color,
-            weatherId: weather,
-            styleId: style,
         })
     })
     if (response.ok) {
         const newItem = await response.json()
-        console.log("NEW ITEM", newItem)
-        await dispatch(currentItem(newItem))
+        console.log('NEWITEM', newItem)
+        const res = await fetch('/api/items/add-to-item', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                newItem,
+                color,
+                weather,
+                style
+            })
+        })
+        if (res.ok) {
+            console.log("NEW ITEM", newItem)
+            await dispatch(currentItem(newItem))
+        }
     }
 }
 
