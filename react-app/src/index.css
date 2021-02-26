@@ -3,7 +3,7 @@ body{
     /* background-color: white; */
     margin: 0;
     overflow-x: hidden;
-    font-family: 'Niconne', cursive;
+    font-family: 'Truculenta', sans-serif;
 }
 
 .no-navbar {
@@ -20,8 +20,14 @@ body{
     margin-top: 2px;
     border-right: .5px solid rgb(33, 51, 45);
     box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation: sliding10 3s;
     /* border-right: 2px solid gray;
     box-shadow: 3px 0px 1em 1px gray; */
+}
+
+@keyframes sliding10 {
+    from{left: -13%}
+    to{left: -5px}
 }
 
 .closet-door-left2{
@@ -32,9 +38,16 @@ body{
     margin-top: 4px;
     border-right: .5px solid rgb(33, 51, 45);
     box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation: sliding20 3s;
     /* border-right: 2px solid gray;
     box-shadow: 3px 0px 1em 1px gray; */
 }
+
+@keyframes sliding20 {
+    from{left: -11%}
+    to{left: 16.5%}
+}
+
 .closet-door-left3{
     position: absolute;
     left: 33%;
@@ -43,9 +56,16 @@ body{
     margin-top: 6px;
     border-right: .5px solid rgb(33, 51, 45);
     box-shadow: 3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation: sliding30 3s;
     /* border-right: 2px solid gray;
     box-shadow: 3px 0px 1em 1px gray; */
 }
+
+@keyframes sliding30 {
+    from{left: -9%}
+    to{left: 33%}
+}
+
 .closet-door-right3{
     position: absolute;
     right: 33%;
@@ -54,10 +74,17 @@ body{
     margin-top: 6px;
     border-right: 1px solid rgb(33, 51, 45);
     box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation: sliding40 3s;
     /* border-left: 2px solid gray;
     box-shadow: 3px 0px 1em 1px gray; */
 
 }
+
+@keyframes sliding40 {
+    from{right: -9%}
+    to{right: 33%}
+}
+
 .closet-door-right2{
     position: absolute;
     right: 16.5%;
@@ -66,9 +93,16 @@ body{
     margin-top: 4px;
     border-right: .5px solid rgb(33, 51, 45);
     box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation: sliding50 3s;
     /* border-left: 2px solid gray;
     box-shadow: 3px 0px 1em 1px gray; */
 }
+
+@keyframes sliding50 {
+    from{right: -11%}
+    to{right: 16.5%}
+}
+
 .closet-door-right1{
     position: absolute;
     right: -5px;
@@ -77,8 +111,14 @@ body{
     margin-top: 2px;
     border-right: .5px solid rgb(33, 51, 45);
     box-shadow: -3px 0px 5px .5px rgba(3, 34, 25, 0.753);
+    animation: sliding60 3s;
     /* border-left: 2px solid gray;
     box-shadow: 3px 0px 1em 1px gray; */
+}
+
+@keyframes sliding60 {
+    from{right: -13%}
+    to{right: -5px}
 }
 
 .closet-door-left10{

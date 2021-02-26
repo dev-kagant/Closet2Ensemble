@@ -8,6 +8,7 @@ import MyCloset from "./components/Closet/Closet";
 import NavBar from "./components/NavBar/NavBar";
 import { authenticate, restoreUser } from "./store/user";
 import theDoor from './images/theGreenestDoor.jpg';
+import theCloset from './images/okthistime.jpg';
 
 
 
@@ -46,6 +47,10 @@ function App() {
           <>
             <div className="no-navbar"></div>
             <div className="closet-main">
+              {/* <div>
+                <img src={theCloset} usemap="#closet-sections" alt="The Closet" />
+                <div className="map-selector"></div>
+              </div> */}
               <div>
                 <img alt="Closet Door" src={theDoor} className="closet-door-left3" />
               </div>

@@ -5,3 +5,4 @@ white
 
 font-family: 'Niconne', cursive;
 font-family: 'Oleo Script Swash Caps', cursive;
+font-family: 'Truculenta', sans-serif;

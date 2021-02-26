@@ -133,19 +133,22 @@ const CategoryDisplay = () => {
             for (let i = 0; i < itemsViewed.length; i++) {
                 if (subCateId !== "- - Select One - -" && itemsViewed[i].subCategoryId == subCateId) {
                     itemsReturned.push(itemsViewed[i])
-                } else if (colorId !== "- - Select One - -" && colorItems.length !== 0) {
+                }
+                if (colorId !== "- - Select One - -" && colorItems.length !== 0) {
                     for (let c = 0; c < colorItems.length; c++) {
                         if (colorItems[c].colors[0].id === itemsViewed[i].colors[0].id) {
                             itemsReturned.push(itemsViewed[i])
                         }
                     }
-                } else if (styleId !== "- - Select One - -" && styleItems.length !== 0) {
+                }
+                if (styleId !== "- - Select One - -" && styleItems.length !== 0) {
                     for (let s = 0; s < styleItems.length; s++) {
                         if (styleItems[s].styles[0].id === itemsViewed[i].styles[0].id) {
                             itemsReturned.push(itemsViewed[i])
                         }
                     }
-                } else if (weatherId !== "- - Select One - -" && weatherItems.length !== 0) {
+                }
+                if (weatherId !== "- - Select One - -" && weatherItems.length !== 0) {
                     for (let w = 0; w < weatherItems.length; w++) {
                         if (weatherItems[w].weathers[0].id === itemsViewed[i].weathers[0].id) {
                             itemsReturned.push(itemsViewed[i])
