@@ -120,14 +120,11 @@ const CategoryDisplay = () => {
         })
         if (response.ok) {
             const res = await response.json()
-            console.log(subCateId)
             let colorItems = res.color.items
             let styleItems = res.style.items
             let weatherItems = res.weather.items
 
             const itemsViewed = originalCategoryItems;
-            console.log(itemsViewed[0].subCategoryId)
-            console.log(itemsViewed[1].subCategoryId)
             const itemsReturned = []
             let newReturnedItems = []
             for (let i = 0; i < itemsViewed.length; i++) {

@@ -17,7 +17,6 @@ const ItemDisplay = () => {
     })
 
     const handleShowImage = () => {
-        console.log("IS It Gone")
         return dispatch(itemModalClose())
     }
 

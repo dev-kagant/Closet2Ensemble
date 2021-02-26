@@ -158,7 +158,6 @@ export const addItem = (itemInfo) => async (dispatch) => {
         color,
         weather,
         style } = itemInfo
-    console.log("IMAGEONE", itemInfo)
     // const saveImage = await fetch("/api/upload/upload", {
     //     method: "POST",
     //     headers: {

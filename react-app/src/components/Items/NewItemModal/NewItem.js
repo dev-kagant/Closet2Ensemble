@@ -69,7 +69,6 @@ const NewItems = () => {
         })
         if (response.ok) {
             let newColor = await response.json()
-            console.log("THE COLOR", newColor)
             await setColor(newColor.color)
             setShowAddColorModal(false)
         }
@@ -91,7 +90,6 @@ const NewItems = () => {
         })
         if (response.ok) {
             let newStyle = await response.json()
-            console.log("THE STYLE", newStyle)
             await setStyle(newStyle.styleType)
             setShowAddStyleModal(false)
         }
@@ -114,7 +112,6 @@ const NewItems = () => {
         if (response.ok) {
             let newWeather = await response.json()
             await setWeather(newWeather.weatherType)
-            console.log("THE WEATHER", weather)
             setShowAddWeatherModal(false)
         }
     }
@@ -257,7 +254,6 @@ const NewItems = () => {
             })
     }
 
-    // console.log("COLORS", size)
 
     return (
         <div className="new-items-main">
