@@ -220,7 +220,6 @@ const NewItems = () => {
 
     const handleNewItem = (e) => {
         e.preventDefault()
-        console.log("The Stuff", subCategory)
         // console.log("The Stuff", ownerId, description, subCategory,
         //     image, size, purchasedAt, datePurchased, lastWorn,
         //     timesWorn, color, weather, style)
@@ -259,7 +258,6 @@ const NewItems = () => {
                         <input
                             className="song-edit_input-box"
                             type="text"
-                            value={color}
                             onChange={(e) => setColor(e.target.value)}
                             required
                         />
@@ -274,7 +272,6 @@ const NewItems = () => {
                         <input
                             className=""
                             type="text"
-                            value={style}
                             onChange={(e) => setStyle(e.target.value)}
                             required
                         />
@@ -289,7 +286,6 @@ const NewItems = () => {
                         <input
                             className=""
                             type="text"
-                            value={weather}
                             onChange={(e) => setWeather(e.target.value)}
                             required
                         />

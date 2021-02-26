@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, Item, Color, Weather, Style, Size, Category, SubCategory, Borrowed, itemColors, db
-
+from app.models import User, Item, Color, Weather, Style, Size, Category, SubCategory, Borrowed, db
+from app.models.color import itemColors
 
 items_routes = Blueprint('items', __name__)
 
@@ -72,21 +72,17 @@ def addNewItem():
     db.session.commit()
     return item.to_dict()
 
-@items_routes.route('/add-to-item', methods=['POST'])
+@items_routes.route('/add-to-item', methods=['POST'])    #Come back and add a map to add more than one at a time
 def addFeatures():
+    item = Item.query.get(request.json['newItem']['id'])
     if(request.json['color']):
-        item = request.json['newItem']['id']
-        color = request.json['color']
-        print("The Deets", item)
+        color = Color.query.get(request.json['color'])
         color.items.append(item)
-        addColor = itemColors.insert().values(colorId=color, itemId=item)
-        db.session.add(addColor)
-        db.session.commit()
-        return "Finished"
-    # if(request.json['weather']):
-    #     request.json['newItem'].weather.append(request.json['color'])
-    #     db.session.commit()
-
-    # if(request.json['style']):
-    #     request.json['newItem'].styles.append(request.json['style'])
-    #     db.session.commit()
+    if(request.json['weather']):
+        weather = Weather.query.get(request.json['weather'])
+        weather.items.append(item)
+    if(request.json['style']):
+        style = Style.query.get(request.json['style'])
+        style.items.append(item)
+    db.session.commit()
+    return item.to_dict()

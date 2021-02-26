@@ -176,7 +176,6 @@ export const addItem = (itemInfo) => async (dispatch) => {
     })
     if (response.ok) {
         const newItem = await response.json()
-        console.log('NEWITEM', newItem)
         const res = await fetch('/api/items/add-to-item', {
             method: "POST",
             headers: {
@@ -190,8 +189,8 @@ export const addItem = (itemInfo) => async (dispatch) => {
             })
         })
         if (res.ok) {
-            console.log("NEW ITEM", newItem)
-            await dispatch(currentItem(newItem))
+            const theItem = await res.json()
+            await dispatch(currentItem(theItem))
         }
     }
 }
