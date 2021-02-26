@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 42d492e786ab
+Revision ID: ab8dc13b8f7e
 Revises: 
-Create Date: 2021-02-25 21:44:58.621608
+Create Date: 2021-02-26 03:04:03.297272
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '42d492e786ab'
+revision = 'ab8dc13b8f7e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -102,20 +102,20 @@ def upgrade():
     op.create_table('itemColors',
     sa.Column('colorId', sa.Integer(), nullable=True),
     sa.Column('itemId', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['colorId'], ['colors.id'], ),
-    sa.ForeignKeyConstraint(['itemId'], ['items.id'], )
+    sa.ForeignKeyConstraint(['colorId'], ['colors.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['itemId'], ['items.id'], ondelete='CASCADE')
     )
     op.create_table('itemStyles',
     sa.Column('styledId', sa.Integer(), nullable=False),
     sa.Column('itemId', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['itemId'], ['items.id'], ),
-    sa.ForeignKeyConstraint(['styledId'], ['styles.id'], )
+    sa.ForeignKeyConstraint(['itemId'], ['items.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['styledId'], ['styles.id'], ondelete='CASCADE')
     )
     op.create_table('itemWeather',
     sa.Column('weatherId', sa.Integer(), nullable=False),
     sa.Column('itemId', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['itemId'], ['items.id'], ),
-    sa.ForeignKeyConstraint(['weatherId'], ['weather.id'], )
+    sa.ForeignKeyConstraint(['itemId'], ['items.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['weatherId'], ['weather.id'], ondelete='CASCADE')
     )
     op.create_table('outfits',
     sa.Column('id', sa.Integer(), nullable=False),

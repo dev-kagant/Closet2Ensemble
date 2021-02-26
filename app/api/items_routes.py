@@ -5,6 +5,11 @@ from app.models.color import itemColors
 items_routes = Blueprint('items', __name__)
 
 
+@items_routes.route('/<int:itemId>')
+def setItem(itemId):
+    item = Item.query.get(itemId)
+    return item.to_dict()
+
 @items_routes.route('/<category>')
 def getCategory(category):
     thisCategory = Category.query.filter(Category.categoryName == category).first()
@@ -86,3 +91,35 @@ def addFeatures():
         style.items.append(item)
     db.session.commit()
     return item.to_dict()
+
+@items_routes.route('/<int:itemId>', methods=['DELETE'])
+def dropItem(itemId):
+    item = Item.query.get(itemId)
+    db.session.delete(item)
+    db.session.commit()
+    return "Item Removed"
+
+@items_routes.route('/get-items', methods=['POST'])
+def getFilterItem():
+    print("WHAT ARE WE GETTING BACK")
+    if request.json['colorId']:
+        color = Color.query.get(request.json['colorId'])
+        color = color.all_items()
+        print("COLOR COLOR COLOR", color)
+    else:
+        color=[]
+    if request.json['styleId']:
+        style = Style.query.get(request.json['styleId'])
+        style = style.all_items()
+        print("STYLE STYLE STYLE", style)
+    else:
+        style=[]
+    if request.json['weatherId']:
+        weather = Weather.query.get(request.json['weatherId'])
+        weather = weather.all_items()
+        print("WEATHER WEATHER WEATHER", weather)
+    else:
+        weather=[]
+    # return "Complete"
+    # return {'color': color.all_items()}
+    return {"color": color, "style": style, "weather": weather}

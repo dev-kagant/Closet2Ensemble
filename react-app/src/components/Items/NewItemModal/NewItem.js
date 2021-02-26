@@ -20,7 +20,7 @@ const NewItems = () => {
     const [subCategory, setSubCategory] = useState('')
     const [image, setImage] = useState(theClothes)
     const [file, setFile] = useState('')
-    const [size, setSize] = useState(null)
+    const [size, setSize] = useState('')
     const [purchasedAt, setPurchasedAt] = useState("")
     const [datePurchased, setDatePurchased] = useState("")
     const [lastWorn, setLastWorn] = useState("")
@@ -37,11 +37,12 @@ const NewItems = () => {
     const colors = useSelector((state) => state.category.colors.colors)
     const styles = useSelector((state) => state.category.styles.styles)
     const weathers = useSelector((state) => state.category.weather.weather)
+    let showItemModal = useSelector((state) => state.category.showItemModal)
 
     const [showAddColorModal, setShowAddColorModal] = useState(false)
     const [showAddStyleModal, setShowAddStyleModal] = useState(false)
     const [showAddWeatherModal, setShowAddWeatherModal] = useState(false)
-    const [showItemModal, setShowItemModal] = useState(false)
+    // const [showItemModal, setShowItemModal] = useState(false)
 
 
     useEffect(() => {
@@ -237,7 +238,20 @@ const NewItems = () => {
             color,
             weather,
             style,
-        })).then(() => setShowItemModal(true))
+        })).then(() => showItemModal = true)
+            .then(() => {
+                setDescription('');
+                setSubCategory('');
+                setImage(theClothes);
+                setSize('');
+                setPurchasedAt("")
+                setDatePurchased('')
+                setLastWorn('')
+                setTimesWorn(0)
+                setColor(null);
+                setStyle(null);
+                setWeather(null)
+            })
             .catch((res) => {
                 if (res.data && res.data.errors) setErrors(res.data.errors);
             })
@@ -296,7 +310,7 @@ const NewItems = () => {
             {(showNewItems) ? (
                 <div className="new-item-body">
                     {showItemModal && (
-                        <Modal onClose={() => setShowItemModal(false)}>
+                        <Modal onClose={() => showItemModal = false}>
                             <ItemDisplay />
                         </Modal>
                     )}
@@ -339,6 +353,7 @@ const NewItems = () => {
                                     <div className="stack-label">
                                         <label>Categorey</label>
                                         <select onChange={(e) => setSubCategory(e.target.value)}>
+                                            <option>- - Select One - -</option>
                                             {categories.map(category => (
                                                 <optgroup label={category.categoryName}>
                                                     {category.subCategories.map(subCate => (

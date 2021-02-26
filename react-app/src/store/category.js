@@ -7,7 +7,8 @@ const initialState = {
     sizes: null,
     categories: null,
     subCategories: null,
-    currentItem: null
+    currentItem: null,
+    showItemModal: false,
 }
 
 // =========== Action Types ==============
@@ -20,6 +21,7 @@ const SET_SUBCATEGORIES = "category/SET_SUBCATEGORIES";
 const SET_CATEGORIES = "category/SET_CATEGORIES";
 const SET_SIZES = "category/SET_SIZES";
 const SET_CURRENT_ITEM = "category/SET_CURRENT_ITEM";
+const SET_SHOW_ITEM_MODAL = "category/SET_SHOW_ITEM_MODAL"
 
 // =========== POJO Actions ==============
 
@@ -62,7 +64,25 @@ const currentItem = (item) => ({
     type: SET_CURRENT_ITEM,
     item,
 });
+
+const showItemModal = (view) => ({
+    type: SET_SHOW_ITEM_MODAL,
+    view
+})
 // =========== Thunk Actions ==============
+export const setCurrentItem = (itemId) => async (dispatch) => {
+    const response = await fetch(`/api/items/${itemId}`)
+    if (response.ok) {
+        const item = await response.json()
+        await dispatch(currentItem(item))
+        await dispatch(showItemModal(true))
+    }
+}
+
+export const itemModalClose = () => async (dispatch) => {
+    await dispatch(showItemModal(false))
+}
+
 export const setCategory = (category) => async (dispatch) => {
     const response = await fetch(`/api/items/${category}`, {
         method: 'GET',
@@ -191,10 +211,21 @@ export const addItem = (itemInfo) => async (dispatch) => {
         if (res.ok) {
             const theItem = await res.json()
             await dispatch(currentItem(theItem))
+            await dispatch(showItemModal(true))
+            return
         }
     }
 }
 
+export const itemDelete = (itemId) => async (dispatch) => {
+    const deleteItem = await fetch(`/api/items/${itemId}`, {
+        method: 'DELETE',
+    })
+    if (deleteItem.ok) {
+        setCurrentItem(null)
+        await dispatch(showItemModal(false))
+    }
+}
 // =========== Reducers Function ==============
 
 const categoryReducer = (state = initialState, action) => {
@@ -238,6 +269,11 @@ const categoryReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentItem: action.item
+            }
+        case SET_SHOW_ITEM_MODAL:
+            return {
+                ...state,
+                showItemModal: action.view
             }
         default:
             return state;

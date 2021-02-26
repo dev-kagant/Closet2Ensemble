@@ -4,8 +4,8 @@ from .db import db
 itemColors = db.Table(
     'itemColors',
     db.Model.metadata,
-    db.Column('colorId', db.Integer, db.ForeignKey('colors.id')),
-    db.Column('itemId', db.Integer, db.ForeignKey('items.id'))
+    db.Column('colorId', db.Integer, db.ForeignKey('colors.id', ondelete="CASCADE")),
+    db.Column('itemId', db.Integer, db.ForeignKey('items.id', ondelete="CASCADE"))
 )
 
 
@@ -14,7 +14,7 @@ class Color(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     color = db.Column(db.String(50), nullable=False)
-    items = db.relationship("Item", secondary=itemColors, backref=db.backref("itemColors.colorId", lazy='dynamic'))
+    items = db.relationship("Item", secondary=itemColors, backref=db.backref("itemColors.colorId", lazy='dynamic', passive_deletes=True))
 
 
     def to_dict(self):
@@ -24,6 +24,6 @@ class Color(db.Model):
         }
 
     def all_items(self):
-        return{
+        return {
             "items": [item.to_dict() for item in self.items]
         }

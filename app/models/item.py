@@ -21,11 +21,11 @@ class Item(db.Model):
     borrowedId = db.Column(db.Integer, db.ForeignKey(
         "borrow.id"))
     weathers = db.relationship("Weather", secondary=theWeather,
-                            backref=db.backref("itemWeather.itemId", lazy="dynamic"))
+                            backref=db.backref("itemWeather.itemId", lazy="dynamic", cascade="all, delete"))
     colors = db.relationship("Color", secondary=itemColors,
-                            backref=db.backref("itemColors.itemId", lazy="dynamic"))
+                            backref=db.backref("itemColors.itemId", lazy="dynamic", cascade="all, delete"))
     styles = db.relationship("Style", secondary=itemStyle,
-                            backref=db.backref("itemStyles.itemId", lazy="dynamic"))
+                            backref=db.backref("itemStyles.itemId", lazy="dynamic", cascade="all, delete"))
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

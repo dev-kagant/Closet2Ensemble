@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { setCurrentItem } from "../../../store/category";
+import ItemDisplay from "../ItemDisplayModal/ItemDisplay";
+import { Modal } from "./../../Modal/Modal";
+import $ from 'jquery';
 
 import './CategoryDisplay.css'
 
@@ -10,6 +14,7 @@ const CategoryDisplay = () => {
 
     const closetOwner = useSelector(state => state.user.closetOwner);
     const sectionCategory = useSelector(state => state.category.category)
+    let showItemModal = useSelector((state) => state.category.showItemModal)
 
     const [originalCategoryItems, setOriginalCategoryItems] = useState([])
     const [categoryItems, setCategoryItems] = useState(null)
@@ -26,6 +31,9 @@ const CategoryDisplay = () => {
     const [styleId, setStyleId] = useState("- - Select One - -");
     const [weatherId, setWeatherId] = useState("- - Select One - -");
 
+    const [errors, setErrors] = useState([]);
+    // const [showItemModal, setShowItemModal] = useState(false)
+
 
     useEffect(() => {
         if (!sectionCategory) {
@@ -34,6 +42,7 @@ const CategoryDisplay = () => {
         setCategoryItems(allItems(sectionCategory.subCategories))
         setOriginalCategoryItems(allItems(sectionCategory.subCategories))
         setSubCate(sectionCategory.subCategories)
+        // setSubCatItems(sectionCategory.subCategories.)
 
     }, []);
 
@@ -81,53 +90,123 @@ const CategoryDisplay = () => {
 
     const handleChangeClean = (e) => { }
 
-    const changeItemsViewed = () => {
-        const itemsViewed = originalCategoryItems;
-        const itemsReturned = []
-        for (let i = 0; i < itemsViewed.length; i++) {
-            if (subCateId && itemsViewed[i].subCategoryId == subCateId) {
-                itemsReturned.push(itemsViewed[i])
-            } else if (colorId !== "- - Select One - -" && colorId.items.length !== 0) {
-                for (let c = 0; c < colorId.items.length; c++) {
-                    if (colorId.items[c].id === itemsViewed[i].id) {
-                        itemsReturned.push(itemsViewed[i])
+    const changeItemsViewed = async () => {
+        let sendFilters = []
+        if (colorId !== "- - Select One - -") {
+            sendFilters.push(colorId.id)
+        } else {
+            sendFilters.push("")
+        }
+        if (styleId !== "- - Select One - -") {
+            sendFilters.push(styleId.id)
+        } else {
+            sendFilters.push("")
+        }
+        if (weatherId !== "- - Select One - -") {
+            sendFilters.push(weatherId.id)
+        } else {
+            sendFilters.push("")
+        }
+        const response = await fetch('/api/items/get-items', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                colorId: sendFilters[0],
+                styleId: sendFilters[1],
+                weatherId: sendFilters[2]
+            })
+        })
+        if (response.ok) {
+            const res = await response.json()
+            console.log(subCateId)
+            let colorItems = res.color.items
+            let styleItems = res.style.items
+            let weatherItems = res.weather.items
+
+            const itemsViewed = originalCategoryItems;
+            console.log(itemsViewed[0].subCategoryId)
+            console.log(itemsViewed[1].subCategoryId)
+            const itemsReturned = []
+            let newReturnedItems = []
+            for (let i = 0; i < itemsViewed.length; i++) {
+                if (subCateId !== "- - Select One - -" && itemsViewed[i].subCategoryId == subCateId) {
+                    itemsReturned.push(itemsViewed[i])
+                } else if (colorId !== "- - Select One - -" && colorItems.length !== 0) {
+                    for (let c = 0; c < colorItems.length; c++) {
+                        if (colorItems[c].colors[0].id === itemsViewed[i].colors[0].id) {
+                            itemsReturned.push(itemsViewed[i])
+                        }
                     }
-                }
-            } else if (styleId !== "- - Select One - -" && styleId.items.length !== 0) {
-                for (let s = 0; s < styleId.items.length; s++) {
-                    if (styleId.items[s].id === itemsViewed[i].id) {
-                        itemsReturned.push(itemsViewed[i])
+                } else if (styleId !== "- - Select One - -" && styleItems.length !== 0) {
+                    for (let s = 0; s < styleItems.length; s++) {
+                        if (styleItems[s].styles[0].id === itemsViewed[i].styles[0].id) {
+                            itemsReturned.push(itemsViewed[i])
+                        }
                     }
-                }
-            } else if (weatherId !== "- - Select One - -" && weatherId.items.length !== 0) {
-                for (let w = 0; w < weatherId.items.length; w++) {
-                    if (weatherId.items[w].id === itemsViewed[i].id) {
-                        itemsReturned.push(itemsViewed[i])
+                } else if (weatherId !== "- - Select One - -" && weatherItems.length !== 0) {
+                    for (let w = 0; w < weatherItems.length; w++) {
+                        if (weatherItems[w].weathers[0].id === itemsViewed[i].weathers[0].id) {
+                            itemsReturned.push(itemsViewed[i])
+                        }
                     }
                 }
             }
+
+            if ((subCateId === '- - Select One - -') &&
+                (colorId === '- - Select One - -') &&
+                (styleId === '- - Select One - -') &&
+                (weatherId === '- - Select One - -')) {
+                return setCategoryItems(originalCategoryItems)
+            }
+
+            return setCategoryItems(itemsReturned)
         }
-        if ((subCateId === '- - Select One - -') &&
-            (colorId === '- - Select One - -') &&
-            (styleId === '- - Select One - -') &&
-            (weatherId === '- - Select One - -')) {
-            return setCategoryItems(originalCategoryItems)
-        }
-        return setCategoryItems(itemsReturned)
+    }
+
+    // ========================== POSSIBLE FIX FOR FILTERING =========================================================
+    // for (let r = 0; r < itemsReturned.length; r++) {
+    //     if ((subCateId !== "- - Select One - -" && itemsReturned[r].subCategoryId === (subCateId)),
+    //         (colorId !== "- - Select One - -" && itemsReturned[r].colors[0].id === (colorId)),
+    //         (styleId !== "- - Select One - -" && itemsReturned[r].styles[0].id === (styleId)),
+    //         (weatherId !== "- - Select One - -" && itemsReturned[r].weathers[0].id === (weatherId))
+    //     ) {
+    //         newReturnedItems.push(itemsReturned[r])
+    //     }
+    // }
+
+    const handleItemView = (e) => {
+        e.preventDefault()
+        setErrors([]);
+        return dispatch(setCurrentItem(e.target.title))
+            .then(() => showItemModal = true)
+            .catch((res) => {
+                if (res.data && res.data.errors) setErrors(res.data.errors);
+            })
+    }
+
+    const handleItemDisplayClose = () => {
+        showItemModal = false
     }
 
 
     return (
         <div className="category-display-modal">
+            {showItemModal && (
+                <div id='close-modal' >
+                    <Modal onClose={handleItemDisplayClose}>
+                        <ItemDisplay />
+                    </Modal>
+                </div>
+            )}
             <h1 className="category-display_header">{sectionCategory.categoryName.toLowerCase()}</h1>
             <div className="category-display_body">
                 <div >
                     <ul className="category-display_items">
                         {categoryItems && categoryItems.map(item => (
-                            <li className="item-icon">
-                                <Link to={`/closet/${closetOwner.id}/category/${item.id}`}>
-                                    <img src={item.image} alt={item.description} />
-                                </Link>
+                            <li className="item-icon" onClick={handleItemView}>
+                                <img id="item-image-sizing" src={item.image} alt={item.description} title={item.id} height="100%" width="100%" />
                             </li>
                         ))}
                     </ul>

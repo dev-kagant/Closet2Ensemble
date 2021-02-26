@@ -43,16 +43,20 @@
     flex-shrink: 1;
     justify-content: space-around;
     margin-right:30px;
-    height: 60vh;
     padding: 20px;
     overflow: auto;
 }
 
 .item-icon {
+    position: relative;
     border: 2px solid black;
     height: 175px;
     width: 175px;
     margin: 30px;
+}
+
+#item-image-sizing{
+    position: absolute;
 }
 
 .category-display_filters{
