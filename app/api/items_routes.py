@@ -79,8 +79,8 @@ def addFeatures():
         color = request.json['color']
         print("The Deets", item)
         color.items.append(item)
-        itemColors.insert().values(colorId=color, itemId=item)
-        # db.session.add(addColor)
+        addColor = itemColors.insert().values(colorId=color, itemId=item)
+        db.session.add(addColor)
         db.session.commit()
         return "Finished"
     # if(request.json['weather']):
