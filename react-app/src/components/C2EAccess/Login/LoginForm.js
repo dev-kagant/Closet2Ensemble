@@ -33,6 +33,18 @@ function LoginForm() {
             });
     }
 
+    const loginDemoUser = () => {
+        return dispatch(login({ email: "demo@aa.io", password: "password" }))
+            .then((res, rej) => {
+                if (res && authentication) {
+                    return history.push(`/closet/${res}`);
+                }
+                return history.push("/");
+            })
+            .catch((res) => {
+                if (res.data && res.data.errors) setErrors(res.data.errors);
+            });
+    }
 
     return (
         <form onSubmit={handleSubmit} className="login-container" >
@@ -60,7 +72,8 @@ function LoginForm() {
                 required
             />
             <button type="submit" className="loginbutton buttonstyle">YOU MAY ENTER</button>
-            <Link to="/sign-up" className="">CREATE  YOUR  CLOSET</Link>
+            <button onClick={loginDemoUser}>Demo User</button>
+            <Link to="/sign-up" className="create-you-closet">CREATE  YOUR  CLOSET</Link>
         </form>
     );
 }

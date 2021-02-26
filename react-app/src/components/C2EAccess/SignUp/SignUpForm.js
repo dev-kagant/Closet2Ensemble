@@ -30,12 +30,14 @@ function SignUpForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-container">
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <h1 className="titlestuff">Closet 2 Ensemble</h1>
-            <h4 className="titlestuff">Your Closet Everywhere Life Takes You</h4>
+            <div className="login-header">
+                <h1 className="titlestuff">Closet 2 Ensemble</h1>
+                <h4 className="titlestuff">Your Closet Everywhere Life Takes You</h4>
+            </div>
             <label>
                 Email
             <input
@@ -72,8 +74,8 @@ function SignUpForm() {
                     required
                 />
             </label>
-            <button type="submit" className="buttonstyle">Open Your Closet</button>
-            <Link to="/" className="">Already Have A Closet</Link>
+            <button type="submit" className="loginbutton buttonstyle">Open Your Closet</button>
+            <Link to="/" className="create-you-closet">Already Have A Closet</Link>
         </form>
     );
 }
