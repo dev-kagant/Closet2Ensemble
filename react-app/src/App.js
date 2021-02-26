@@ -8,7 +8,8 @@ import MyCloset from "./components/Closet/Closet";
 import NavBar from "./components/NavBar/NavBar";
 import { authenticate, restoreUser } from "./store/user";
 import theDoor from './images/theGreenestDoor.jpg';
-import theCloset from './images/okthistime.jpg';
+// import theCloset from './images/okthistime.jpg';
+import Footer from "./components/Footer/Footer";
 
 
 
@@ -42,6 +43,7 @@ function App() {
               <MyCloset />
             </Route>
           </Switch>
+          <Footer />
         </>
       ) : (
           <>
