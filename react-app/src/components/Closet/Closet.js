@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ImageMap from "image-map";
 import { Modal } from "./../Modal/Modal";
-import { setCategory, setColors, setSubCategories, setWeather, setStyles, setSizes, setCategories } from '../../store/category'
+import categoryReducer, { setCategory, setColors, setSubCategories, setWeather, setStyles, setSizes, setCategories } from '../../store/category'
 import $ from 'jquery';
 import theCloset from '../../images/okthistime.jpg';
 import theDoor from '../../images/theGreenestDoor.jpg';
@@ -14,13 +14,21 @@ import NewItems from '../Items/NewItemModal/NewItem';
 
 
 const MyCloset = () => {
-    const currentClosetOwner = useSelector(state => state.user.closetOwner);
     const dispatch = useDispatch();
+
+    const closetOwnerItems = useSelector(state => state.user.closetOwner.items);
+
+    const [categoryItems, setCategoryItems] = useState([])
+    const [subCates, setSubCates] = useState([])
+
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showNewItemModal, setShowNewItemModal] = useState(false);
 
 
     useEffect(() => {
+        if (!closetOwnerItems) {
+            return
+        }
         ImageMap('img[usemap]', 0)
         hoverEffect()
     }, [])
@@ -28,10 +36,22 @@ const MyCloset = () => {
 
     const handleCategory = async (e) => {
         await dispatch(setCategory(e.target.alt))
-        await dispatch(setSubCategories())
-        await dispatch(setColors())
-        await dispatch(setStyles())
-        await dispatch(setWeather())
+            .then((subCate) => {
+                const newCategoryItems = []
+                const newSubCates = new Set()
+                for (let i = 0; i < closetOwnerItems.length; i++) {
+                    for (let j = 0; j < subCate.length; j++) {
+                        if (closetOwnerItems[i].subCategoryId === subCate[j].id) {
+                            newCategoryItems.push(closetOwnerItems[i])
+                            console.log("WHY", subCate[j])
+                            console.log("WHY", subCate[j].subCategoryName)
+                            newSubCates.add(subCate[j])
+                        }
+                    }
+                }
+                setCategoryItems(newCategoryItems)
+                setSubCates([...newSubCates])
+            })
         setShowCategoryModal(true)
     }
 
@@ -68,11 +88,10 @@ const MyCloset = () => {
     // =========================================================================================
 
     return (
-
         <div className="big-closet-container">
             {showCategoryModal && (
                 <Modal onClose={() => setShowCategoryModal(false)}>
-                    <CategoryDisplay />
+                    <CategoryDisplay categoryItems={categoryItems} subCates={subCates} />
                 </Modal>
             )}
             {showNewItemModal && (
@@ -123,8 +142,6 @@ const MyCloset = () => {
                 <img alt="Closet Door" src={theDoor} className="closet-door-right10" />
             </div>
             <div className="add-item-icon" onClick={handleNewItems}><i class="fas fa-shopping-bag"></i></div>
-            {/* <div className="add-item-icon"><i class="fas fa-plus"></i></div> */}
-            {/* <div className="add-item-icon"><i class="fas fa-tags"></i></div> */}
         </div>
     )
 }

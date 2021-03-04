@@ -60,8 +60,8 @@ export const login = ({ email, password }) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        await dispatch(isAuthenticated());
         await dispatch(setClosetOwner(data));
+        await dispatch(isAuthenticated());
         return data.id;
     }
 };

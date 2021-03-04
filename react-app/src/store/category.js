@@ -93,6 +93,7 @@ export const setCategory = (category) => async (dispatch) => {
     if (response.ok) {
         const categoryItems = await response.json()
         await dispatch(currentCategory(categoryItems))
+        return categoryItems.subCategories
     }
 }
 

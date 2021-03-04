@@ -16,8 +16,8 @@ import Footer from "./components/Footer/Footer";
 function App() {
   const dispatch = useDispatch();
   const history = useHistory();
+  // const closetOwner = useSelector(state => state.user.closetOwner);
   const authorized = useSelector(state => state.user.authenticated);
-  const closetOwner = useSelector(state => state.user.closetOwner);
 
   useEffect(() => {
     authenticate()
