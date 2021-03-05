@@ -43,8 +43,6 @@ const MyCloset = () => {
                     for (let j = 0; j < subCate.length; j++) {
                         if (closetOwnerItems[i].subCategoryId === subCate[j].id) {
                             newCategoryItems.push(closetOwnerItems[i])
-                            console.log("WHY", subCate[j])
-                            console.log("WHY", subCate[j].subCategoryName)
                             newSubCates.add(subCate[j])
                         }
                     }
