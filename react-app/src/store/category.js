@@ -69,6 +69,8 @@ const showItemModal = (view) => ({
     type: SET_SHOW_ITEM_MODAL,
     view
 })
+
+
 // =========== Thunk Actions ==============
 export const setCurrentItem = (itemId) => async (dispatch) => {
     const response = await fetch(`/api/items/${itemId}`)
@@ -145,19 +147,6 @@ export const setCategories = () => async (dispatch) => {
     }
 }
 
-
-// export const setPic = async (data) => {
-//     const response = await fetch("/api/auth/test", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             data
-//         }),
-//     });
-//     return await response.json();
-// }
 
 
 export const setImage = (file) => async (dispatch) => {
@@ -245,6 +234,8 @@ export const itemDelete = (itemId) => async (dispatch) => {
         await dispatch(showItemModal(false))
     }
 }
+
+
 // =========== Reducers Function ==============
 
 const categoryReducer = (state = initialState, action) => {

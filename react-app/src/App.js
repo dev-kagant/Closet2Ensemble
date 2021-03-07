@@ -42,6 +42,9 @@ function App() {
             <Route path="/">
               <MyCloset />
             </Route>
+            {/* <Route path="/search">
+              <Search />
+            </Route> */}
           </Switch>
           <Footer />
         </>
@@ -50,9 +53,9 @@ function App() {
           <div className="no-navbar"></div>
           <div className="closet-main">
             {/* <div>
-                <img src={theCloset} usemap="#closet-sections" alt="The Closet" />
-                <div className="map-selector"></div>
-              </div> */}
+              <img src={theCloset} usemap="#closet-sections" alt="The Closet" />
+              <div className="map-selector"></div>
+            </div> */}
             <div>
               <img alt="Closet Door" src={theDoor} className="closet-door-left3" />
             </div>

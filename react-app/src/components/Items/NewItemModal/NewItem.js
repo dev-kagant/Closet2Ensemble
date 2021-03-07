@@ -19,8 +19,6 @@ const NewItems = () => {
     const [showNewItems, setShowNewItems] = useState(true)
     const [description, setDescription] = useState('')
     const [subCategory, setSubCategory] = useState('')
-    // const [image, setImage] = useState(theClothes)
-    // const [file, setFile] = useState('')
     const [itemImage, setItemImage] = useState({ 'name': null });
     const [imageView, setImageView] = useState(theClothes);
 
@@ -33,8 +31,6 @@ const NewItems = () => {
     const [color, setColor] = useState(null)
     const [style, setStyle] = useState(null)
     const [weather, setWeather] = useState(null)
-    // const [category, setCategory] = useState(null);
-    // const [currentItem, setCurrentItem] = useState(null)
     const [errors, setErrors] = useState([]);
     const sizes = useSelector((state) => state.category.sizes.sizes)
     const subCates = useSelector((state) => state.category.subCategories.subCates)
@@ -47,7 +43,6 @@ const NewItems = () => {
     const [showAddColorModal, setShowAddColorModal] = useState(false)
     const [showAddStyleModal, setShowAddStyleModal] = useState(false)
     const [showAddWeatherModal, setShowAddWeatherModal] = useState(false)
-    // const [showItemModal, setShowItemModal] = useState(false)
 
 
     useEffect(() => {
@@ -178,6 +173,7 @@ const NewItems = () => {
                         if (res.data && res.data.errors) setErrors(res.data.errors);
                     })
             })
+        console.log("What went wrong: ", errors)
     }
 
 

@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import ImageMap from "image-map";
+
 import { Modal } from "./../Modal/Modal";
-import categoryReducer, { setCategory, setColors, setSubCategories, setWeather, setStyles, setSizes, setCategories } from '../../store/category'
+import { restoreUser } from '../../store/user'
+import { setCategory, setColors, setSubCategories, setWeather, setStyles, setSizes, setCategories } from '../../store/category'
+
 import $ from 'jquery';
+import "./Closet.css";
+
+import ImageMap from "image-map";
 import theCloset from '../../images/okthistime.jpg';
 import theDoor from '../../images/theGreenestDoor.jpg';
-import "./Closet.css";
 import CategoryDisplay from '../Items/CategoryDisplay/CategoryDisplay';
 import NewItems from '../Items/NewItemModal/NewItem';
 
@@ -15,6 +19,7 @@ import NewItems from '../Items/NewItemModal/NewItem';
 
 const MyCloset = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
 
     const closetOwnerItems = useSelector(state => state.user.closetOwner.items);
@@ -25,7 +30,6 @@ const MyCloset = () => {
 
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showNewItemModal, setShowNewItemModal] = useState(false);
-
 
     useEffect(() => {
         if (!closetOwnerItems || !closetOwner) {
@@ -55,6 +59,7 @@ const MyCloset = () => {
         setShowCategoryModal(true)
     }
 
+
     const handleNewItems = async () => {
         await dispatch(setSubCategories())
         await dispatch(setColors())
@@ -64,12 +69,16 @@ const MyCloset = () => {
         await dispatch(setCategories())
         return setShowNewItemModal(true)
     }
-    // await history.push(`/closet/${closetOwner}`)
+
+
     const handleDoneAdding = async () => {
         setShowNewItemModal(false);
-
-        // await history.replace(`/closet/${closetOwner}`)
+        let res = await dispatch(restoreUser())
+        if (res) {
+            history.push(`/closet/${res}`)
+        }
     }
+
 
     // ============ Only necessary if I want an effect on the image map ===================
     const hoverEffect = () => {
