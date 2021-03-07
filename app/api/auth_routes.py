@@ -3,6 +3,9 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.helpers import upload_file_to_s3
+# from app.config import Config
+from werkzeug.utils import secure_filename
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -72,6 +75,28 @@ def sign_up():
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@auth_routes.route('/test', methods=['POST'])
+def upload_file():
+    print("WHATS COMING IN====== ", request.files['image'])
+
+    if "image" not in request.files:
+        print("No image key in request.files")
+        return {'errors': 'no user file'}, 401
+
+    file = request.files["image"]
+
+    if file.filename == "":
+        print("Please select a file")
+        return {'errors': 'no filename'}, 401
+
+    # if file and allowed_file(file.filename):
+    file.filename = secure_filename(file.filename)
+    output = upload_file_to_s3(file)
+    print("WHATS THIS", output)
+    # Add and commit to database
+    return {'output': str(output)}
 
 
 @auth_routes.route('/unauthorized')

@@ -46,42 +46,42 @@ function App() {
           <Footer />
         </>
       ) : (
-          <>
-            <div className="no-navbar"></div>
-            <div className="closet-main">
-              {/* <div>
+        <>
+          <div className="no-navbar"></div>
+          <div className="closet-main">
+            {/* <div>
                 <img src={theCloset} usemap="#closet-sections" alt="The Closet" />
                 <div className="map-selector"></div>
               </div> */}
-              <div>
-                <img alt="Closet Door" src={theDoor} className="closet-door-left3" />
-              </div>
-              <div>
-                <img alt="Closet Door" src={theDoor} className="closet-door-left2" />
-              </div>
-              <div>
-                <img alt="Closet Door" src={theDoor} className="closet-door-left1" />
-              </div>
-              <div>
-                <img alt="Closet Door" src={theDoor} className="closet-door-right3" />
-              </div>
-              <div>
-                <img alt="Closet Door" src={theDoor} className="closet-door-right2" />
-              </div>
-              <div>
-                <img alt="Closet Door" src={theDoor} className="closet-door-right1" />
-              </div>
+            <div>
+              <img alt="Closet Door" src={theDoor} className="closet-door-left3" />
             </div>
-            <Switch>
-              <Route path="/" exact={true}>
-                <LoginFormModal />
-              </Route>
-              <Route path="/sign-up" exact={true}>
-                <SignUpModal />
-              </Route>
-            </Switch>
-          </>
-        )}
+            <div>
+              <img alt="Closet Door" src={theDoor} className="closet-door-left2" />
+            </div>
+            <div>
+              <img alt="Closet Door" src={theDoor} className="closet-door-left1" />
+            </div>
+            <div>
+              <img alt="Closet Door" src={theDoor} className="closet-door-right3" />
+            </div>
+            <div>
+              <img alt="Closet Door" src={theDoor} className="closet-door-right2" />
+            </div>
+            <div>
+              <img alt="Closet Door" src={theDoor} className="closet-door-right1" />
+            </div>
+          </div>
+          <Switch>
+            <Route path="/" exact={true}>
+              <LoginFormModal />
+            </Route>
+            <Route path="/sign-up" exact={true}>
+              <SignUpModal />
+            </Route>
+          </Switch>
+        </>
+      )}
     </>
 
   )

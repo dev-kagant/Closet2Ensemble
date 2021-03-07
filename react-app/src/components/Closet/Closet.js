@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ImageMap from "image-map";
 import { Modal } from "./../Modal/Modal";
@@ -16,7 +16,9 @@ import NewItems from '../Items/NewItemModal/NewItem';
 const MyCloset = () => {
     const dispatch = useDispatch();
 
+
     const closetOwnerItems = useSelector(state => state.user.closetOwner.items);
+    const closetOwner = useSelector(state => state.user.closetOwner.id)
 
     const [categoryItems, setCategoryItems] = useState([])
     const [subCates, setSubCates] = useState([])
@@ -26,7 +28,7 @@ const MyCloset = () => {
 
 
     useEffect(() => {
-        if (!closetOwnerItems) {
+        if (!closetOwnerItems || !closetOwner) {
             return
         }
         ImageMap('img[usemap]', 0)
@@ -62,7 +64,12 @@ const MyCloset = () => {
         await dispatch(setCategories())
         return setShowNewItemModal(true)
     }
+    // await history.push(`/closet/${closetOwner}`)
+    const handleDoneAdding = async () => {
+        setShowNewItemModal(false);
 
+        // await history.replace(`/closet/${closetOwner}`)
+    }
 
     // ============ Only necessary if I want an effect on the image map ===================
     const hoverEffect = () => {
@@ -93,7 +100,7 @@ const MyCloset = () => {
                 </Modal>
             )}
             {showNewItemModal && (
-                <Modal onClose={() => setShowNewItemModal(false)}>
+                <Modal onClose={handleDoneAdding}>
                     <NewItems />
                 </Modal>
             )}

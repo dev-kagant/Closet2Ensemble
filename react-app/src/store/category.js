@@ -145,6 +145,42 @@ export const setCategories = () => async (dispatch) => {
     }
 }
 
+
+// export const setPic = async (data) => {
+//     const response = await fetch("/api/auth/test", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//             data
+//         }),
+//     });
+//     return await response.json();
+// }
+
+
+export const setImage = (file) => async (dispatch) => {
+
+    const formData = new FormData();
+
+    // for single file
+    formData.append("image", file);
+
+    const res = await fetch(`/api/auth/test`, {
+        method: "POST",
+        body: formData,
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        // dispatch(setProfilePic(data.file));
+        return data;
+    } else {
+        console.log('error')
+    }
+};
+
 export const addItem = (itemInfo) => async (dispatch) => {
     const {
         ownerId,
@@ -159,22 +195,6 @@ export const addItem = (itemInfo) => async (dispatch) => {
         color,
         weather,
         style } = itemInfo
-    // const saveImage = await fetch("/api/upload/upload", {
-    //     method: "POST",
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         image,
-
-    //     })
-    // })
-    // console.log("COMING BACK", saveImage)
-    // let newImage;
-    // if (saveImage.ok) {
-    //     newImage = await saveImage.json()
-    // }
-    // console.log("IMAGE", newImage.img_url)
 
     const response = await fetch('/api/items/add', {
         method: "POST",
@@ -212,7 +232,6 @@ export const addItem = (itemInfo) => async (dispatch) => {
             const theItem = await res.json()
             await dispatch(currentItem(theItem))
             await dispatch(showItemModal(true))
-            return
         }
     }
 }

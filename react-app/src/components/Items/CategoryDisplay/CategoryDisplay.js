@@ -141,7 +141,6 @@ const CategoryDisplay = (items) => {
                     </select>
                     <label>Color:</label>
                     <select onChange={(e) => setColor(e.target.value)}>
-                        {/* <select onClick={(e) => { setColor(e.target.value) }} onChange={changeItemsViewed}> */}
                         <option>- - Select One - -</option>
                         {colors.map(oneColor => (
                             <option value={oneColor}>{oneColor}</option>

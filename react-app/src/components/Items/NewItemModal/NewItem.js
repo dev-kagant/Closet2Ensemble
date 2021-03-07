@@ -4,7 +4,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import $ from 'jquery';
 import { Modal } from "./../../Modal/Modal";
 import ItemDisplay from "../ItemDisplayModal/ItemDisplay"
-import { addItem } from "../../../store/category";
+import { addItem, setImage } from "../../../store/category";
 import theClothes from "../../../images/clothesCollage.jpg"
 import ItemsNav from "./ItemsNav"
 
@@ -13,13 +13,18 @@ import './NewItem.css'
 
 const NewItems = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const ownerId = useSelector(state => state.user.closetOwner.id);
     const [showNewItems, setShowNewItems] = useState(true)
     const [description, setDescription] = useState('')
     const [subCategory, setSubCategory] = useState('')
-    const [image, setImage] = useState(theClothes)
-    const [file, setFile] = useState('')
+    // const [image, setImage] = useState(theClothes)
+    // const [file, setFile] = useState('')
+    const [itemImage, setItemImage] = useState({ 'name': null });
+    const [imageView, setImageView] = useState(theClothes);
+
+
     const [size, setSize] = useState('')
     const [purchasedAt, setPurchasedAt] = useState("")
     const [datePurchased, setDatePurchased] = useState("")
@@ -28,8 +33,8 @@ const NewItems = () => {
     const [color, setColor] = useState(null)
     const [style, setStyle] = useState(null)
     const [weather, setWeather] = useState(null)
-    const [category, setCategory] = useState(null);
-    const [currentItem, setCurrentItem] = useState(null)
+    // const [category, setCategory] = useState(null);
+    // const [currentItem, setCurrentItem] = useState(null)
     const [errors, setErrors] = useState([]);
     const sizes = useSelector((state) => state.category.sizes.sizes)
     const subCates = useSelector((state) => state.category.subCategories.subCates)
@@ -46,7 +51,6 @@ const NewItems = () => {
 
 
     useEffect(() => {
-        // setStateFilters()
         if (!subCates && !colors && !styles && !weathers && !categories) {
             return
         }
@@ -123,134 +127,56 @@ const NewItems = () => {
         setShowNewItems(false)
     }
 
-    const readUrl = async (input) => {
-        console.log("OKOKOK", input)
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#imagePreview')
-                    .attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
+    const handleAddImage = (e) => {
+        const file = e.target.files[0];
+        if (file) setItemImage(file);
+
+        const fileReader = new FileReader();
+        if (file) {
+            fileReader.readAsDataURL(file);
         }
-    }
-
-
-    // ============= THE MESS THAT IS AWS =========================
-
-    // const uploadImage = async (e) => {
-    //     e.preventDefault()
-    //     // let result = await readUrl(image)
-    //     console.log("Something to pass the time", e.target[0].files[0])
-    //     setImage(e.target[0].value)
-    //     const res = await fetch("/api/upload/new", {
-    //         method: "POST",
-    //         // headers: {
-    //         //     // 'Content-Type': 'multipart/form-data'
-    //         //     'Content-Type': 'application/json'
-    //         // },
-    //         // body: e.target[0].value
-    //         body: JSON.stringify({
-    //             file: e.target[0].files[0],
-    //             filename: e.target[0].files[0].name
-    //         })
-    //     })
-    //     if (res.ok) {
-    //         const thisPhoto = await res.json()
-    //         console.log("NEW STUFF", thisPhoto)
-    //         const photo = await fetch(`/api/upload/`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({ photo: thisPhoto })
-    //         })
-    //         if (photo.ok) {
-    //             console.log("THE RESPONSE", photo)
-    //             const showPhoto = await photo.json()
-    //             console.log("THIS", showPhoto.filename)
-    //             setImage(showPhoto)
-    //         }
-    //     }
-    // }
-
-    // if (image.files && image.files[0]) {
-
-    // var reader = new FileReader();
-    // reader.onload = function (evt) {
-    //     console.log(evt.target.result);
-    // };
-    // reader.onload = function (e) {
-    //     $(result = e.target.result);
-    //     console.log("Something is here", result)
-    // };
-    // if (file.name == null) {
-    //     setErrors(["Choose a file"]);
-    //     return;
-    // }
-
-    // console.log("KEEP", res)
-    // if (res.ok)
-    // if (res.data.postUrl) {
-    //     setErrors([]);
-    //     window.fetch(res.data.postUrl,
-    //         {
-    //             method: "PUT",
-    //             headers: {
-    //                 "Content-Type": file.type,
-    //             },
-    //             body: file,
-    //         }
-    //     ).then(() => {
-    //         setFile(null);
-    //         setImage(res.data.getUrl);
-    //     })
-    // }
-    // else if (res.data.error) {
-    //     setErrors([res.data.error]);
-    // }
-
-
-    // }
-    // ===================== WHERE DOES IT END =======================================
+        fileReader.onloadend = () => {
+            setImageView(fileReader.result);
+        }
+    };
 
 
     const handleNewItem = (e) => {
         e.preventDefault()
-        // console.log("The Stuff", ownerId, description, subCategory,
-        //     image, size, purchasedAt, datePurchased, lastWorn,
-        //     timesWorn, color, weather, style)
         setErrors([]);
-        return dispatch(addItem({
-            ownerId,
-            description,
-            subCategory,
-            image,
-            size,
-            purchasedAt,
-            datePurchased,
-            lastWorn,
-            timesWorn,
-            color,
-            weather,
-            style,
-        })).then(() => showItemModal = true)
-            .then(() => {
-                setDescription('');
-                setSubCategory('');
-                setImage(theClothes);
-                setSize('');
-                setPurchasedAt("")
-                setDatePurchased('')
-                setLastWorn('')
-                setTimesWorn(0)
-                setColor(null);
-                setStyle(null);
-                setWeather(null)
-            })
-            .catch((res) => {
-                if (res.data && res.data.errors) setErrors(res.data.errors);
+        dispatch(setImage(itemImage))
+            .then(file => {
+                dispatch(addItem({
+                    ownerId,
+                    description,
+                    subCategory,
+                    image: file.output,
+                    size,
+                    purchasedAt,
+                    datePurchased,
+                    lastWorn,
+                    timesWorn,
+                    color,
+                    weather,
+                    style,
+                })).then(() => showItemModal = true)
+                    .then(() => {
+                        setDescription('');
+                        setSubCategory('');
+                        setImageView(theClothes);
+                        setSize('');
+                        setPurchasedAt("")
+                        setDatePurchased('')
+                        setLastWorn('')
+                        setTimesWorn(0)
+                        setColor(null);
+                        setStyle(null);
+                        setWeather(null)
+                    })
+                    .catch((res) => {
+                        if (res.data && res.data.errors) setErrors(res.data.errors);
+                    })
             })
     }
 
@@ -317,23 +243,16 @@ const NewItems = () => {
                             <button type="submit">Add Item</button>
                         </div>
                         <div className="new-item-form">
-                            {/* <div className="new-item-form" onSubmit={handleNewItem}> */}
                             <div className="image-description">
-                                <div className="image-box"><img id="imagePreview" src={image} width="100%" height="100%" /></div>
-                                {/* <form enctype="multipart/form-data" className="add-item_form">
-                                <div className="image-box"></div>
-                                    <form action="/api/upload/new" method="post" className="add-item_form">
-                                    <label className="add-item_label">Image</label>
+                                <div className="">
+                                    <label>Upload Image</label>
+                                    <img className="image-box" src={imageView} width="100%" height="100%" />
                                     <input
+                                        onChange={handleAddImage}
                                         type="file"
-                                        name="file"
-                                    enctype="multipart/form-data"
-                                    accept=".png,.jpg,.jpeg"
-                                        onChange={(e) => {  uploadImage(e.target);setFile(e.target.files[0]) }}
-                                    onChange={(e) => { readUrl(e.target); setFile(e.target.files[0]) }}
-                                    />
-                                    <button type="submit" name="submit">Upload</button>
-                                </form> */}
+                                        name="user_file" />
+
+                                </div>
                                 <div className="add-item_form item-description">
                                     <label className="add-item_label">Description</label>
                                     <textarea

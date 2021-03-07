@@ -72,7 +72,7 @@ def addWeather():
 @items_routes.route('/add', methods=['POST'])
 def addNewItem():
     item = Item(**request.json)
-    print("NEW-ITEM", item.description)
+    print("NEW-ITEM", item.image)
     db.session.add(item)
     db.session.commit()
     return item.to_dict()
