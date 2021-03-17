@@ -38,13 +38,18 @@ Pip Datetime (https://pypi.org/project/DateTime/) (https://realpython.com/python
 * NavBar
 * Modal
 * C2EAccess
-![SignUp/Login](./C2E_Development/Images-gifs/login.gif)
+	* Login
+	* SignUp
 * Closet
 * Items
 	* Category Display
 	* Item Display
 	* New Item
 * Footer
+
+![SignUp/Login](./C2E_Development/Images-gifs/login.gif)
+![Open Category](./C2E_Development/Images-gifs/category.gif)
+
 
 ## Frontend
 Built using React which allowed for easy rendering of information on pages without requiring a full page reload, this came in handy when rendering the many Modals with in the site, it also allowed for reusing components on different page templates. Redux was also used to help keep the state so that different aspects of it could be used on different pages.
