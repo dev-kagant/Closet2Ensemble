@@ -5,7 +5,7 @@
 
 -  [Description](https://github.com/dev-kagant/Closet2Ensemble#Description)
 -  [Using Closet to Ensemble](https://github.com/dev-kagant/Closet2Ensemble#Using-the-application)
--  [Technologies Used](https://github.com/dev-kagant/Closet2Ensemble#Technologies-Used)
+-  [Technologies Used](https://github.com/dev-kagant/Closet2Ensemble#Technologies)
 -  [React Components](https://github.com/dev-kagant/Closet2Ensemble#React-Components-List)
 -  [Frontend](https://github.com/dev-kagant/Closet2Ensemble#Frontend)
 -  [Backend](https://github.com/dev-kagant/Closet2Ensemble#Backend)
