@@ -24,31 +24,32 @@ Closet to Ensemble is a virtual closet app that allows its user to track items w
 
 ##  Technologies
 
-Javascript (https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-Python (https://docs.python.org/3/)
-React for the frontend (https://reactjs.org/docs/getting-started.html)
-Flask for the backend (https://flask.palletsprojects.com/en/1.1.x/)
-Redux to help manage the state of the application (https://redux.js.org/introduction/getting-started)
-React-redux to connect my react components with the redux store (https://redux-toolkit.js.org/introduction/quick-start)
-Redux-logger only for development (https://www.npmjs.com/package/redux-logger)
-Redux-thunk to apply middleware throughout the application (https://www.npmjs.com/package/redux-thunk)
-Pip Datetime (https://pypi.org/project/DateTime/) (https://realpython.com/python-datetime/)
+* Javascript (https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* Python (https://docs.python.org/3/)
+* React for the frontend (https://reactjs.org/docs/getting-started.html)
+* Flask for the backend (https://flask.palletsprojects.com/en/1.1.x/)
+* Redux to help manage the state of the application (https://redux.js.org/introduction/getting-started)
+* React-redux to connect my react components with the redux store (https://redux-toolkit.js.org/introduction/quick-start)
+* Redux-logger only for development (https://www.npmjs.com/package/redux-logger)
+* Redux-thunk to apply middleware throughout the application (https://www.npmjs.com/package/redux-thunk)
+* Pip Datetime (https://pypi.org/project/DateTime/) (https://realpython.com/python-datetime/)
 
 ## React Components List
 * NavBar
 * Modal
 * C2EAccess
-	* Login
-	* SignUp
+	* Login and SignUp
+![SignUp/Login](./C2E_Development/Images-gifs/login.gif)
+
 * Closet
 * Items
 	* Category Display
+![Open Category](./C2E_Development/Images-gifs/category.gif)
+
 	* Item Display
 	* New Item
 * Footer
 
-![SignUp/Login](./C2E_Development/Images-gifs/login.gif)
-![Open Category](./C2E_Development/Images-gifs/category.gif)
 
 
 ## Frontend
