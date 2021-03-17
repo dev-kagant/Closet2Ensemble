@@ -22,7 +22,7 @@ const NavBar = () => {
             Home
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/search" exact={true} className="navbar-halo" activeClassName="active">
             Search
           </NavLink>
@@ -33,7 +33,7 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
-          {/* <NavLink to={`/closet/friend/${friendsCloset.id}`} exact={true} activeClassName="active"> */}
+          <NavLink to={`/closet/friend/${friendsCloset.id}`} exact={true} activeClassName="active">
           <NavLink to="/closet/friend/" exact={true} className="navbar-halo" activeClassName="active">
             Friends
           </NavLink>
@@ -42,7 +42,7 @@ const NavBar = () => {
           <NavLink to={`/closet/:id/planner`} exact={true} className="navbar-halo" activeClassName="active">
             Closet Stats
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <div className="logout-div navbar-halo" onClick={onLogout}>Logout</div>
         </li>
