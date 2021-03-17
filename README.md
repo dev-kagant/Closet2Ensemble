@@ -3,12 +3,12 @@
 
 ## Table of Content
 
--  [Description](https://github.com/dev-kagant/Closet2Ensemble##Description)
--  [Using Closet to Ensemble](https://github.com/dev-kagant/Closet2Ensemble##Using-the-application)
--  [Technologies Used](https://github.com/dev-kagant/Closet2Ensemble##Technologies-Used)
--  [React Components](https://github.com/dev-kagant/Closet2Ensemble##React-Components-List)
--  [Frontend](https://github.com/dev-kagant/Closet2Ensemble##Frontend)
--  [Backend](https://github.com/dev-kagant/Closet2Ensemble##Backend)
+-  [Description](https://github.com/dev-kagant/Closet2Ensemble#Description)
+-  [Using Closet to Ensemble](https://github.com/dev-kagant/Closet2Ensemble#Using-the-application)
+-  [Technologies Used](https://github.com/dev-kagant/Closet2Ensemble#Technologies-Used)
+-  [React Components](https://github.com/dev-kagant/Closet2Ensemble#React-Components-List)
+-  [Frontend](https://github.com/dev-kagant/Closet2Ensemble#Frontend)
+-  [Backend](https://github.com/dev-kagant/Closet2Ensemble#Backend)
 
 ## Description
 Closet to Ensemble is a virtual closet app that allows its user to track items within their individual closets. It also allows users to follow their friends and family members closets, share clothes. As well as track items usage, how often they actually wear each item of clothing, and eventually being able sell them on the thrift shop.
