@@ -133,7 +133,7 @@ const userReducer = (state = initialState, action) => {
             };
         case REMOVE_CLOSET_OWNER:
             return {
-                state: initialState    // Check that this is possible?
+                state: initialState    // I believe this should work
             }
         default:
             return state;
