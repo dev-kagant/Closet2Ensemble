@@ -21,7 +21,7 @@ const Footer = () => {
             <div className="footer-projects">
                 <h3>Personal Projects</h3>
                 <a href="virus-overflow.herokuapp.com">Virus Overflow</a>
-                {/* <a href="brainbloow.herokuapp.com">BrainGain</a> */}
+                <a href="brainbloow.herokuapp.com">BrainGain</a>
                 <a href="cheonjae.herokuapp.com">Cheonjae</a>
                 <a href="closettoensemble.herokuapp.com">Closet To Ensemble</a>
             </div>
