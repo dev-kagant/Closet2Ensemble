@@ -26,19 +26,19 @@ const NavBar = () => {
           <NavLink to="/search" exact={true} className="navbar-halo" activeClassName="active">
             Search
           </NavLink>
-        </li>
+        </li> */}
         <li>
-          <NavLink to={`/closet/:id/planner`} className="navbar-halo" exact={true} activeClassName="active">
+          <NavLink to={`/closet/${currentClosetOwner.id}/planner`} className="navbar-halo" exact={true} activeClassName="active">
             Planner
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to={`/closet/friend/${friendsCloset.id}`} exact={true} activeClassName="active">
           <NavLink to="/closet/friend/" exact={true} className="navbar-halo" activeClassName="active">
             Friends
           </NavLink>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <NavLink to={`/closet/:id/planner`} exact={true} className="navbar-halo" activeClassName="active">
             Closet Stats
           </NavLink>

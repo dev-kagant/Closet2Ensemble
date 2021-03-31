@@ -10,13 +10,14 @@ import { authenticate, restoreUser } from "./store/user";
 import theDoor from './images/theGreenestDoor.jpg';
 // import theCloset from './images/okthistime.jpg';
 import Footer from "./components/Footer/Footer";
+import OutfitPlanner from "./components/OutfitPlanner/outfitPlanner"
 
 
 
 function App() {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const closetOwner = useSelector(state => state.user.closetOwner);
+  const closetOwner = useSelector(state => state.user.closetOwner);
   const authorized = useSelector(state => state.user.authenticated);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function App() {
         history.push(`/closet/${res}`)
       }
     })();
-  }, [dispatch]);
+  }, []);
 
 
   return (
@@ -39,14 +40,14 @@ function App() {
         <>
           <NavBar />
           <Switch>
+            <Route path={`/closet/:id/planner`} exact>
+              <OutfitPlanner />
+            </Route>
             <Route path="/">
               <MyCloset />
             </Route>
             {/* <Route path="/search">
               <Search />
-            </Route>
-            <Route path="/planner">
-              <Planner />
             </Route> */}
           </Switch>
           <Footer />
