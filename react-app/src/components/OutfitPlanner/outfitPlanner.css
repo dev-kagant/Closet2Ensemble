@@ -1,0 +1,9 @@
+.planner-main {
+    height: 100vh;
+    width: 100vw;
+    border-top: 10px solid rgba(161, 160, 160, 0.644);
+}
+
+.planner-header{
+    margin-left: 50%;
+}
